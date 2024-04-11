@@ -1,0 +1,35 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add Item" : {
+
+    },
+    "Beyes" : {
+
+    },
+    "home" : {
+
+    },
+    "Item at %@" : {
+
+    },
+    "Select an item" : {
+
+    },
+    "tab.%@" : {
+
+    },
+    "tab.home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "home"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

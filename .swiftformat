@@ -1,0 +1,2 @@
+--disable trailingCommas,wrapMultilineStatementBraces
+--exclude Beyes/Generated, Beyes/Frameworks
