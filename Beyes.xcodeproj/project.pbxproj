@@ -81,8 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				AEEB7C992BB80A3C00A3E2CD /* SupabaseServices.swift */,
-				AEB368CA2BC5DBA600961FE6 /* NetworkServices.swift */,
-				AE2ADAB62BC2C2F500822383 /* ShopsService.swift */,
 			);
 			path = Supabase;
 			sourceTree = "<group>";
@@ -188,6 +186,8 @@
 		AEEB7C982BB80A2100A3E2CD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AE2ADAB62BC2C2F500822383 /* ShopsService.swift */,
+				AEB368CA2BC5DBA600961FE6 /* NetworkServices.swift */,
 				AE2ADAB52BC2C2D700822383 /* Supabase */,
 			);
 			path = Services;
