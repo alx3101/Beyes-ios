@@ -36,8 +36,14 @@ class Router: ObservableObject {
         routeStack.last ?? .home
     }
 
-    func push(route: AppRoute) {
-        routeStack.append(route)
+    func push(route: AppRoute, animated: Bool = false, animation: Animation? = nil) {
+        guard animated else {
+            routeStack.append(route)
+            return
+        }
+        withAnimation(animation) {
+            routeStack.append(route)
+        }
     }
 
     func pop() {
