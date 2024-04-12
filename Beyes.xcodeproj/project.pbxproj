@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		AE2ADAB72BC2C2F500822383 /* ShopsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2ADAB62BC2C2F500822383 /* ShopsService.swift */; };
 		AE2ADABA2BC2C72200822383 /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = AE2ADAB92BC2C72200822383 /* CocoaMQTT */; };
+		AE36D1542BC9D06D00E910F8 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1532BC9D06D00E910F8 /* AuthServices.swift */; };
+		AE36D1572BC9DD0A00E910F8 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1562BC9DD0A00E910F8 /* APIErrors.swift */; };
+		AE36D1612BC9E20700E910F8 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = AE36D1602BC9E20700E910F8 /* SwiftyBeaver */; };
+		AE36D1632BC9E49C00E910F8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1622BC9E49C00E910F8 /* AuthViewModel.swift */; };
+		AE36D1652BC9E5B300E910F8 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1642BC9E5B300E910F8 /* Loadable.swift */; };
 		AE9576F72BBDD2B700CDD267 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576F62BBDD2B700CDD267 /* Dependencies.swift */; };
 		AE9576FD2BBDD74500CDD267 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576FC2BBDD74500CDD267 /* RouteView.swift */; };
 		AE9576FF2BBDD76D00CDD267 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576FE2BBDD76D00CDD267 /* AppRoute.swift */; };
@@ -37,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		AE2ADAB62BC2C2F500822383 /* ShopsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsService.swift; sourceTree = "<group>"; };
+		AE36D1532BC9D06D00E910F8 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
+		AE36D1562BC9DD0A00E910F8 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
+		AE36D1622BC9E49C00E910F8 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		AE36D1642BC9E5B300E910F8 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		AE9576F62BBDD2B700CDD267 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		AE9576FC2BBDD74500CDD267 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		AE9576FE2BBDD76D00CDD267 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
@@ -71,6 +80,7 @@
 				AEEB7C8F2BB809B200A3E2CD /* Auth in Frameworks */,
 				AEEB7C972BB809B200A3E2CD /* Storage in Frameworks */,
 				AEEB7C952BB809B200A3E2CD /* Realtime in Frameworks */,
+				AE36D1612BC9E20700E910F8 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,9 +95,26 @@
 			path = Supabase;
 			sourceTree = "<group>";
 		};
+		AE36D1552BC9DCF900E910F8 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				AE36D1562BC9DD0A00E910F8 /* APIErrors.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		AE36D1662BC9EAF800E910F8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AE36D1622BC9E49C00E910F8 /* AuthViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		AE9576F42BBDD29F00CDD267 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				AE36D1662BC9EAF800E910F8 /* ViewModels */,
 				AE9576F52BBDD2A900CDD267 /* Managers */,
 				AEEB7C982BB80A2100A3E2CD /* Services */,
 				AE9576F62BBDD2B700CDD267 /* Dependencies.swift */,
@@ -106,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				AEEB7C782BB8089F00A3E2CD /* Assets.xcassets */,
+				AE36D1642BC9E5B300E910F8 /* Loadable.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -138,6 +166,7 @@
 		AEEB7C732BB8089E00A3E2CD /* Beyes */ = {
 			isa = PBXGroup;
 			children = (
+				AE36D1552BC9DCF900E910F8 /* Errors */,
 				AE9577052BBDF31200CDD267 /* Generated */,
 				AE9577042BBDF2EA00CDD267 /* Resources */,
 				AE9576F42BBDD29F00CDD267 /* Dependencies */,
@@ -189,6 +218,7 @@
 				AE2ADAB62BC2C2F500822383 /* ShopsService.swift */,
 				AEB368CA2BC5DBA600961FE6 /* NetworkServices.swift */,
 				AE2ADAB52BC2C2D700822383 /* Supabase */,
+				AE36D1532BC9D06D00E910F8 /* AuthServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -234,6 +264,7 @@
 				AEEB7C962BB809B200A3E2CD /* Storage */,
 				AEEB7C9C2BB80BA900A3E2CD /* Supabase */,
 				AE2ADAB92BC2C72200822383 /* CocoaMQTT */,
+				AE36D1602BC9E20700E910F8 /* SwiftyBeaver */,
 			);
 			productName = Beyes;
 			productReference = AEEB7C712BB8089E00A3E2CD /* Beyes.app */;
@@ -266,6 +297,7 @@
 			packageReferences = (
 				AEEB7C8D2BB809B200A3E2CD /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				AE2ADAB82BC2C72200822383 /* XCRemoteSwiftPackageReference "CocoaMQTT" */,
+				AE36D15F2BC9E20700E910F8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = AEEB7C722BB8089E00A3E2CD /* Products */;
 			projectDirPath = "";
@@ -341,7 +373,10 @@
 				AEEB7C9F2BB80CC700A3E2CD /* Main.swift in Sources */,
 				AEEB7CA72BB81CBB00A3E2CD /* Color.swift in Sources */,
 				AE9576FD2BBDD74500CDD267 /* RouteView.swift in Sources */,
+				AE36D1632BC9E49C00E910F8 /* AuthViewModel.swift in Sources */,
+				AE36D1542BC9D06D00E910F8 /* AuthServices.swift in Sources */,
 				AEEB7C772BB8089E00A3E2CD /* ContentView.swift in Sources */,
+				AE36D1652BC9E5B300E910F8 /* Loadable.swift in Sources */,
 				AEEB7C892BB8091F00A3E2CD /* Home.swift in Sources */,
 				AE9576F72BBDD2B700CDD267 /* Dependencies.swift in Sources */,
 				AEEB7C8C2BB8095D00A3E2CD /* Shop.swift in Sources */,
@@ -351,6 +386,7 @@
 				AE9576FF2BBDD76D00CDD267 /* AppRoute.swift in Sources */,
 				AEB368CB2BC5DBA600961FE6 /* NetworkServices.swift in Sources */,
 				AEEB7C752BB8089E00A3E2CD /* BeyesApp.swift in Sources */,
+				AE36D1572BC9DD0A00E910F8 /* APIErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +606,14 @@
 				version = 2.1.6;
 			};
 		};
+		AE36D15F2BC9E20700E910F8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.0.0;
+			};
+		};
 		AEEB7C8D2BB809B200A3E2CD /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase-community/supabase-swift.git";
@@ -585,6 +629,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AE2ADAB82BC2C72200822383 /* XCRemoteSwiftPackageReference "CocoaMQTT" */;
 			productName = CocoaMQTT;
+		};
+		AE36D1602BC9E20700E910F8 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE36D15F2BC9E20700E910F8 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
 		};
 		AEEB7C8E2BB809B200A3E2CD /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -19,16 +19,25 @@ extension EnvironmentValues {
     }
 }
 
-class ViewModels: ObservableObject {}
+class ViewModels: ObservableObject {
+    let authentication: AuthViewModel
+
+    init(services: Services) {
+        authentication = AuthViewModel(authServices: services.authServices)
+    }
+}
+
 class Services: ObservableObject {
     fileprivate let networkServices: NetworkServices
-    let ShopsServices: ShopServices
+    let shopsServices: ShopServices
     let supabase: SupabaseServices
+    let authServices: AuthServices
 
     init() {
         supabase = SupabaseServices()
-        networkServices = NetworkServices(supabase: supabase.client)
-        ShopsServices = ShopServices(networkServices: networkServices)
+        authServices = AuthServices(client: supabase.client)
+        networkServices = NetworkServices(supabase: supabase.client, refreshToken: authServices.refreshSession)
+        shopsServices = ShopServices(networkServices: networkServices)
     }
 }
 
@@ -37,7 +46,7 @@ final class AppEnvironment: ObservableObject {
     let services: Services
 
     init() {
-        viewModels = ViewModels()
         services = Services()
+        viewModels = ViewModels(services: services)
     }
 }
