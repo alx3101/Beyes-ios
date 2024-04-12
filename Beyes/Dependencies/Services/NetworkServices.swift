@@ -38,9 +38,12 @@ class NetworkServices: NetworkServicesProtocol {
     typealias ResponseType = Any // You can specify the data type you want as a response
 
     let supabase: SupabaseClient
+    private let refreshToken: () async throws -> Void
 
-    init(supabase: SupabaseClient) {
+    init(supabase: SupabaseClient,
+         refreshToken: @escaping () async throws -> Void) {
         self.supabase = supabase
+        self.refreshToken = refreshToken
     }
 
     func request<T: Codable>(request: Request<T>, schema: EndpointSchema, endpoint: EndpointRequest) async throws -> T {
@@ -106,7 +109,18 @@ class NetworkServices: NetworkServicesProtocol {
             }
         } catch {
             // If an error occurs, throw the exception to be handled externally
-            throw error
+            if let error = error as? APIError,
+               case let .httpCode(code) = error,
+               code == 401 {
+                do {
+                    try await refreshToken()
+                } catch {
+                    throw APIError.tokenRefresh
+                }
+                return try await self.request(request: request, schema: schema, endpoint: endpoint)
+            } else {
+                throw error
+            }
         }
     }
 }
