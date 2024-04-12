@@ -5,4 +5,11 @@
 //  Created by Alex Popa on 12/04/24.
 //
 
-import Foundation
+import SwiftUI
+
+enum Loadable<Value> {
+    case notRequested
+    case loading
+    case loaded(Value)
+    case failed(Error)
+}
