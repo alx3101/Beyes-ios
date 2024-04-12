@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 struct Splash: View {
+    @EnvironmentObject var router: Router
+    @Environment(\.appEnvironment) var appEnvironment
+
     var body: some View {
         VStack {
             Text("Beyes")
@@ -26,5 +29,20 @@ struct Splash: View {
                 endPoint: .top
             )
         )
+        .onAppear {
+            appEnvironment.viewModels.authentication.$currentSession
+                .sink { session in
+                    if let currentSession = session {
+                        if currentSession {
+                            router.setMain(.home)
+                            print("Logged")
+
+                        } else {
+                            print("Not logged in, todo login")
+                        }
+                    }
+                }
+                .store(in: &appEnvironment.viewModels.authentication.cancellables)
+        }
     }
 }
