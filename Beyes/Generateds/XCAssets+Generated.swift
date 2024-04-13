@@ -26,7 +26,6 @@ internal enum Asset {
   internal enum Colors {
     internal static let primary = ColorAsset(name: "primary")
     internal static let secondary = ColorAsset(name: "secondary")
-    internal static let t = ColorAsset(name: "t")
     internal static let tertiary = ColorAsset(name: "tertiary")
   }
   internal static let roastedPepper = ColorAsset(name: "roasted_pepper
