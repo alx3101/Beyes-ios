@@ -11,12 +11,15 @@ import SwiftUI
 
 protocol AuthViewModelProvider {
     var currentSession: Bool? { get }
-    func signIn(email: String, password: String)
+    func signIn(action: @escaping (Loadable<Void>) -> Void)
     func logout(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class AuthViewModel: AuthViewModelProvider, ObservableObject {
     @Published var currentSession: Bool?
+    @Published var email: String = ""
+    @Published var password: String = ""
+
     private let service: AuthServices
     var cancellables = Set<AnyCancellable>()
 
@@ -32,7 +35,17 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
             .store(in: &cancellables)
     }
 
-    func signIn(email _: String, password _: String) {}
+    func signIn(action: @escaping (Loadable<Void>) -> Void) {
+        action(.notRequested)
+        Task {
+            do {
+                try await service.signIn(email: email, password: password)
+                action(.loaded(voidReturn))
+            } catch {
+                action(.failed(error))
+            }
+        }
+    }
 
     func logout(completion: @escaping (Result<Void, Error>) -> Void) {
         Task {
