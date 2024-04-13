@@ -19,6 +19,12 @@
 		AE9576FF2BBDD76D00CDD267 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576FE2BBDD76D00CDD267 /* AppRoute.swift */; };
 		AE9577012BBDF03600CDD267 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9577002BBDF03600CDD267 /* Splash.swift */; };
 		AEB368CB2BC5DBA600961FE6 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB368CA2BC5DBA600961FE6 /* NetworkServices.swift */; };
+		AEEB1A422BCA9F3100CEF98A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1A412BCA9F3100CEF98A /* LoginView.swift */; };
+		AEEB1A452BCA9F9A00CEF98A /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1A442BCA9F9A00CEF98A /* TextField.swift */; };
+		AEEB1A472BCAA9B700CEF98A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1A462BCAA9B700CEF98A /* LoadingView.swift */; };
+		AEEB1A4C2BCAAE1300CEF98A /* Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1A4B2BCAAE1300CEF98A /* Void.swift */; };
+		AEEB1A4E2BCAB62C00CEF98A /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1A4D2BCAB62C00CEF98A /* Buttons.swift */; };
+		AEEB1A532BCABD7400CEF98A /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB1A522BCABD7400CEF98A /* XCAssets+Generated.swift */; };
 		AEEB7C752BB8089E00A3E2CD /* BeyesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB7C742BB8089E00A3E2CD /* BeyesApp.swift */; };
 		AEEB7C772BB8089E00A3E2CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB7C762BB8089E00A3E2CD /* ContentView.swift */; };
 		AEEB7C792BB8089F00A3E2CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEEB7C782BB8089F00A3E2CD /* Assets.xcassets */; };
@@ -51,6 +57,12 @@
 		AE9576FE2BBDD76D00CDD267 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
 		AE9577002BBDF03600CDD267 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
 		AEB368CA2BC5DBA600961FE6 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		AEEB1A412BCA9F3100CEF98A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		AEEB1A442BCA9F9A00CEF98A /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		AEEB1A462BCAA9B700CEF98A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		AEEB1A4B2BCAAE1300CEF98A /* Void.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Void.swift; sourceTree = "<group>"; };
+		AEEB1A4D2BCAB62C00CEF98A /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		AEEB1A522BCABD7400CEF98A /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "XCAssets+Generated.swift"; path = "Beyes/Generateds/XCAssets+Generated.swift"; sourceTree = SOURCE_ROOT; };
 		AEEB7C712BB8089E00A3E2CD /* Beyes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beyes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEEB7C742BB8089E00A3E2CD /* BeyesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeyesApp.swift; sourceTree = "<group>"; };
 		AEEB7C762BB8089E00A3E2CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,9 +150,28 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		AE9577052BBDF31200CDD267 /* Generated */ = {
+		AEEB1A432BCA9F8800CEF98A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AEEB1A442BCA9F9A00CEF98A /* TextField.swift */,
+				AEEB1A462BCAA9B700CEF98A /* LoadingView.swift */,
+				AEEB1A4D2BCAB62C00CEF98A /* Buttons.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AEEB1A482BCAAD8400CEF98A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AEEB1A4B2BCAAE1300CEF98A /* Void.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AEEB1A512BCABD6200CEF98A /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				AEEB1A522BCABD7400CEF98A /* XCAssets+Generated.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -166,8 +197,9 @@
 		AEEB7C732BB8089E00A3E2CD /* Beyes */ = {
 			isa = PBXGroup;
 			children = (
+				AEEB1A512BCABD6200CEF98A /* Generated */,
+				AEEB1A482BCAAD8400CEF98A /* Extensions */,
 				AE36D1552BC9DCF900E910F8 /* Errors */,
-				AE9577052BBDF31200CDD267 /* Generated */,
 				AE9577042BBDF2EA00CDD267 /* Resources */,
 				AE9576F42BBDD29F00CDD267 /* Dependencies */,
 				AEEB7CA52BB81CAB00A3E2CD /* Extension */,
@@ -196,10 +228,12 @@
 		AEEB7C872BB8090C00A3E2CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AEEB1A432BCA9F8800CEF98A /* Components */,
 				AEEB7C882BB8091F00A3E2CD /* Home.swift */,
 				AEEB7C9E2BB80CC700A3E2CD /* Main.swift */,
 				AEEB7CA32BB8197000A3E2CD /* Settings.swift */,
 				AE9577002BBDF03600CDD267 /* Splash.swift */,
+				AEEB1A412BCA9F3100CEF98A /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE9577012BBDF03600CDD267 /* Splash.swift in Sources */,
+				AEEB1A452BCA9F9A00CEF98A /* TextField.swift in Sources */,
 				AEEB7C9A2BB80A3C00A3E2CD /* SupabaseServices.swift in Sources */,
 				AEEB7C7E2BB8089F00A3E2CD /* Persistence.swift in Sources */,
 				AEEB7C9F2BB80CC700A3E2CD /* Main.swift in Sources */,
@@ -379,14 +414,19 @@
 				AE36D1652BC9E5B300E910F8 /* Loadable.swift in Sources */,
 				AEEB7C892BB8091F00A3E2CD /* Home.swift in Sources */,
 				AE9576F72BBDD2B700CDD267 /* Dependencies.swift in Sources */,
+				AEEB1A532BCABD7400CEF98A /* XCAssets+Generated.swift in Sources */,
 				AEEB7C8C2BB8095D00A3E2CD /* Shop.swift in Sources */,
 				AEEB7CA42BB8197000A3E2CD /* Settings.swift in Sources */,
 				AEEB7C812BB8089F00A3E2CD /* Beyes.xcdatamodeld in Sources */,
+				AEEB1A422BCA9F3100CEF98A /* LoginView.swift in Sources */,
 				AE2ADAB72BC2C2F500822383 /* ShopsService.swift in Sources */,
 				AE9576FF2BBDD76D00CDD267 /* AppRoute.swift in Sources */,
 				AEB368CB2BC5DBA600961FE6 /* NetworkServices.swift in Sources */,
+				AEEB1A4E2BCAB62C00CEF98A /* Buttons.swift in Sources */,
 				AEEB7C752BB8089E00A3E2CD /* BeyesApp.swift in Sources */,
 				AE36D1572BC9DD0A00E910F8 /* APIErrors.swift in Sources */,
+				AEEB1A472BCAA9B700CEF98A /* LoadingView.swift in Sources */,
+				AEEB1A4C2BCAAE1300CEF98A /* Void.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
