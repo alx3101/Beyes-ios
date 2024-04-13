@@ -20,7 +20,7 @@ extension EnvironmentValues {
 }
 
 class ViewModels: ObservableObject {
-    let authentication: AuthViewModel
+    @ObservedObject var authentication: AuthViewModel
 
     init(services: Services) {
         authentication = AuthViewModel(authServices: services.authServices)
