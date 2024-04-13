@@ -10,15 +10,18 @@ import SwiftUI
 
 enum AppRoute {
     case splash
+    case login
     case home
 
     @ViewBuilder
     func getView() -> some View {
         switch self {
-        case .home:
-            HomeView()
         case .splash:
             Splash()
+        case .home:
+            HomeView()
+        case .login:
+            LoginView()
         }
     }
 }

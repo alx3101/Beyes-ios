@@ -8,8 +8,43 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var router: Router
+    @Environment(\.appEnvironment) var appEnvironment
+
+    @State private var action: Loadable<Void> = .notRequested
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+                .frame(height: 150)
+
+            CustomTextField(text: appEnvironment.viewModels.$authentication.email, placeholder: "Your e-mail")
+
+            Spacer()
+                .frame(height: 16)
+
+            CustomSecureField(text: appEnvironment.viewModels.$authentication.password, placeholder: "Your password")
+
+            Button("Sign in") {
+                print("Button pressed!")
+            }
+            .padding(.vertical, 10)
+            .buttonStyle(Primary(type: .pill))
+
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+        .overlay {
+            if action.isLoading {
+                LoadingView()
+            }
+        }
+    }
+}
+
+private extension LoginView {
+    func login() {
+        appEnvironment.viewModels.authentication.signIn { action = $0 }
     }
 }
 
