@@ -30,19 +30,21 @@ struct Splash: View {
             )
         )
         .onAppear {
-            appEnvironment.viewModels.authentication.$currentSession
-                .sink { session in
-                    if let currentSession = session {
-                        if currentSession {
-                            router.setMain(.home)
-                            print("Logged")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                appEnvironment.viewModels.authentication.$currentSession
+                    .sink { session in
+                        if let currentSession = session {
+                            if currentSession {
+                                router.setMain(.home)
+                                print("Logged")
 
-                        } else {
-                            print("Not logged in, todo login")
+                            } else {
+                                router.setMain(.login)
+                            }
                         }
                     }
-                }
-                .store(in: &appEnvironment.viewModels.authentication.cancellables)
+                    .store(in: &appEnvironment.viewModels.authentication.cancellables)
+            }
         }
     }
 }
