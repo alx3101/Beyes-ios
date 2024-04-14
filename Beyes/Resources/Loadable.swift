@@ -20,4 +20,12 @@ enum Loadable<Value> {
             return false
         }
     }
+
+    var hasError: Error? {
+        if case let .failed(error) = self {
+            return error
+        } else {
+            return nil
+        }
+    }
 }
