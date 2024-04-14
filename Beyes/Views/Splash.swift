@@ -35,11 +35,11 @@ struct Splash: View {
                     .sink { session in
                         if let currentSession = session {
                             if currentSession {
-                                router.setMain(.home)
+                                router.setMain(.home, animated: true, animation: .easeIn)
                                 print("Logged")
 
                             } else {
-                                router.setMain(.login)
+                                router.setMain(.login, animated: true, animation: .easeIn)
                             }
                         }
                     }

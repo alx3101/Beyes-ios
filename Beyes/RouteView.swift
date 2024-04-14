@@ -53,8 +53,16 @@ class Router: ObservableObject {
         _ = routeStack.popLast()
     }
 
-    func setMain(_ route: AppRoute) {
-        routeStack.removeAll()
-        routeStack.append(route)
+    func setMain(_ route: AppRoute, animated: Bool = false, animation: Animation? = nil) {
+        guard animated else {
+            routeStack.removeAll()
+            routeStack.append(route)
+            return
+        }
+
+        withAnimation(animation) {
+            routeStack.removeAll()
+            routeStack.append(route)
+        }
     }
 }
