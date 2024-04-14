@@ -14,29 +14,55 @@ struct LoginView: View {
     @State private var action: Loadable<Void> = .notRequested
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
                 .frame(height: 150)
 
-            CustomTextField(text: appEnvironment.viewModels.$authentication.email, placeholder: "Your e-mail")
+            CustomTextField(text: appEnvironment.viewModels.$authentication.email,
+                            topTitle: "E-mail",
+                            placeholder: "Your e-mail")
 
             Spacer()
                 .frame(height: 16)
 
             CustomSecureField(text: appEnvironment.viewModels.$authentication.password, placeholder: "Your password")
 
+            Spacer()
+                .frame(height: 16)
+
             Button("Sign in") {
-                print("Button pressed!")
+                login()
             }
             .padding(.vertical, 10)
             .buttonStyle(Primary(type: .pill))
 
+            HStack {
+                Button(action: {}, label: {
+                    Text("Dimenticato la password?")
+                        .font(.system(size: 12))
+                        .padding(.leading, 8)
+                })
+
+                Spacer()
+            }
+
             Spacer()
+
+            HStack(spacing: 4) {
+                Text("Non hai un account?")
+                Text("Registrati")
+                    .foregroundStyle(Asset.Colors.primary.swiftUIColor)
+            }
+            .font(.system(size: 15))
+
+            Spacer().frame(height: 50)
         }
         .padding(.horizontal, 16)
         .overlay {
             if action.isLoading {
                 LoadingView()
+            } else if let error = action.hasError {
+                Text(error.localizedDescription)
             }
         }
     }
