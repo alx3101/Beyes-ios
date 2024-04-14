@@ -12,13 +12,18 @@ import SwiftUI
 protocol AuthViewModelProvider {
     var currentSession: Bool? { get }
     func signIn(action: @escaping (Loadable<Void>) -> Void)
-    func logout(completion: @escaping (Result<Void, Error>) -> Void)
+    func signUp(action: @escaping (Loadable<Void>) -> Void)
+    func logout(action: @escaping (Loadable<Void>) -> Void)
 }
 
 class AuthViewModel: AuthViewModelProvider, ObservableObject {
     @Published var currentSession: Bool?
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var name: String = ""
+    @Published var surname: String = ""
+    @Published var country: String = ""
+    @Published var dateOfBirth: String = ""
 
     private let service: AuthServices
     var cancellables = Set<AnyCancellable>()
@@ -36,7 +41,7 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
     }
 
     func signIn(action: @escaping (Loadable<Void>) -> Void) {
-        action(.notRequested)
+        action(.loading)
         Task {
             do {
                 try await service.signIn(email: email, password: password)
@@ -47,13 +52,24 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
         }
     }
 
-    func logout(completion: @escaping (Result<Void, Error>) -> Void) {
+    func signUp(action: @escaping (Loadable<Void>) -> Void) {
+        action(.loading)
+        Task {
+            do {
+                try await service.signUp(email: email, password: password)
+            } catch {
+                action(.failed(error))
+            }
+        }
+    }
+
+    func logout(action: @escaping (Loadable<Void>) -> Void) {
         Task {
             do {
                 try await service.logout()
-                completion(.success(()))
+                action(.loaded(voidReturn))
             } catch {
-                completion(.failure(error))
+                action(.failed(error))
             }
         }
     }
