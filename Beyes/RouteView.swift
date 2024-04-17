@@ -8,61 +8,48 @@
 import Foundation
 import SwiftUI
 
-struct RootView: View {
-    @StateObject private var routing: Router
-
-    init(rootNode: AppRoute) {
-        _routing = StateObject(wrappedValue: Router(rootNode: rootNode))
-    }
+struct RouterView: View {
+    @StateObject var router: Router = .init(rootViewContent: AnyView(Splash()))
+    // Our root view content
 
     var body: some View {
-        NavigationView {
-            VStack {
-                routing.currentRoute.getView()
-            }
-            .environmentObject(routing)
+        NavigationStack(path: $router.path) {
+            router.rootViewContent
+                .navigationDestination(for: AppRoute.self) { route in
+                    route.view()
+                }
         }
+        .environmentObject(router)
     }
 }
 
 class Router: ObservableObject {
-    @Published var routeStack: [AppRoute] = []
+    // Used to programatically control our navigation stack
+    @Published var path: NavigationPath = .init()
+    @Published var rootViewContent: AnyView
 
-    init(rootNode: AppRoute) {
-        routeStack = [rootNode]
+    init(rootViewContent: AnyView) {
+        self.rootViewContent = rootViewContent
     }
 
-    var currentRoute: AppRoute {
-        routeStack.last ?? .home
-    }
-
-    func push(route: AppRoute, animated: Bool = false, animation: Animation? = nil) {
-        guard animated else {
-            routeStack.append(route)
-            return
-        }
-        withAnimation(animation) {
-            routeStack.append(route)
+    func setMain(_ route: AppRoute) {
+        withAnimation(.easeIn) {
+            rootViewContent = AnyView(route.view())
         }
     }
 
-    func pop() {
-        guard routeStack.count > 1 else {
-            return
-        }
-        _ = routeStack.popLast()
+    // Used by views to navigate to another view
+    func navigateTo(_ route: AppRoute) {
+        path.append(route)
     }
 
-    func setMain(_ route: AppRoute, animated: Bool = false, animation: Animation? = nil) {
-        guard animated else {
-            routeStack.removeAll()
-            routeStack.append(route)
-            return
-        }
+    // Used to go back to the previous screen
+    func navigateBack() {
+        path.removeLast()
+    }
 
-        withAnimation(animation) {
-            routeStack.removeAll()
-            routeStack.append(route)
-        }
+    // Pop to the root screen in our hierarchy
+    func popToRoot() {
+        path.removeLast(path.count)
     }
 }

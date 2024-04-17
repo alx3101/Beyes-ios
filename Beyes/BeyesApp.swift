@@ -21,7 +21,7 @@ struct BeyesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView(rootNode: .splash)
+            RouterView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

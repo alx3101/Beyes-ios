@@ -30,16 +30,16 @@ struct Splash: View {
             )
         )
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 appEnvironment.viewModels.authentication.$currentSession
                     .sink { session in
                         if let currentSession = session {
                             if currentSession {
-                                router.setMain(.home, animated: true, animation: .easeIn)
+                                router.setMain(.home)
                                 print("Logged")
 
                             } else {
-                                router.setMain(.login, animated: true, animation: .easeIn)
+                                router.setMain(.login)
                             }
                         }
                     }

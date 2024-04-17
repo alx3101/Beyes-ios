@@ -54,9 +54,13 @@ struct LoginView: View {
                     .foregroundStyle(Asset.Colors.primary.swiftUIColor)
             }
             .font(.system(size: 15))
+            .onTapGesture {
+                router.navigateTo(.registration)
+            }
 
             Spacer().frame(height: 50)
         }
+        .navigationBarBackButtonHidden()
         .padding(.horizontal, 16)
         .overlay {
             if action.isLoading {
