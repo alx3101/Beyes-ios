@@ -25,7 +25,9 @@ struct LoginView: View {
             Spacer()
                 .frame(height: 16)
 
-            CustomSecureField(text: appEnvironment.viewModels.$authentication.password, placeholder: "Your password")
+            CustomSecureField(text: appEnvironment.viewModels.$authentication.password,
+                              topTitle: "Password",
+                              placeholder: "Your password")
 
             Spacer()
                 .frame(height: 16)
@@ -60,7 +62,6 @@ struct LoginView: View {
 
             Spacer().frame(height: 50)
         }
-        .navigationBarBackButtonHidden()
         .padding(.horizontal, 16)
         .overlay {
             if action.isLoading {
@@ -75,9 +76,11 @@ struct LoginView: View {
 private extension LoginView {
     func login() {
         appEnvironment.viewModels.authentication.signIn { action = $0 }
+        router.setMain(.home)
     }
 }
 
 #Preview {
     LoginView()
+        .environmentObject(Router(rootViewContent: .init(AppRoute.login.view())))
 }
