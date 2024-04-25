@@ -1,4 +1,5 @@
 {
+  "originHash" : "ce58681d46bfcd6ace7a590900faa124502f313c5bcba033ad0b7b84f4ec5a4a",
   "pins" : [
     {
       "identity" : "cocoamqtt",
@@ -7,6 +8,15 @@
       "state" : {
         "revision" : "990303d3549d4284fadd6c83ff8480e6ab0b4d42",
         "version" : "2.1.6"
+      }
+    },
+    {
+      "identity" : "flagkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/madebybowtie/FlagKit.git",
+      "state" : {
+        "revision" : "f12111d91902d23fd1d9cc7ad9198030b049795d",
+        "version" : "2.4.0"
       }
     },
     {
@@ -73,5 +83,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
