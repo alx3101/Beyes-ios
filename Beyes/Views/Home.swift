@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(\.appEnvironment) var appEnvironment
     @EnvironmentObject var router: Router
 
     var body: some View {
         VStack {
             Text("home")
-        }.onAppear {
-            router.setMain(.splash)
+            Button { router.setMain(.registration) } label: {
+                Text("main")
+            }
+//            Button("Logout") {
+//                appEnvironment.viewModels.authentication.logout { completion in
+//                    switch completion {
+//                    case .success:
+//                        router.setMain(.splash)
+//                    case let .failure(failure):
+//                        print(failure.localizedDescription)
+//                    }
+//                }
+//            }
         }
     }
 }
