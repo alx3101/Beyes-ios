@@ -20,8 +20,8 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
     @Published var currentSession: Bool?
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var name: String = ""
-    @Published var surname: String = ""
+    @Published var confirmedPassword: String = ""
+    @Published var fullName: String = ""
     @Published var country: String = ""
     @Published var dateOfBirth: String = ""
 
@@ -72,5 +72,14 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
                 action(.failed(error))
             }
         }
+    }
+
+    func clearFields() {
+        email = ""
+        password = ""
+        confirmedPassword = ""
+        fullName = ""
+        country = ""
+        dateOfBirth = ""
     }
 }
