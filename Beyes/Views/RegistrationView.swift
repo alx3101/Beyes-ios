@@ -13,11 +13,7 @@ struct RegistrationView: View {
     @Environment(\.appEnvironment) var appEnvironment
 
     @State private var action: Loadable<Void> = .notRequested
-    @State private var selectedCountry: Country? = nil
-    @State private var isPickerVisible = false
-    @State private var termsChecked = false
-    @State private var privacyChecked = false
-    var isButtonDisabled: Bool { !termsChecked || !privacyChecked }
+    var isButtonDisabled: Bool { !appEnvironment.viewModels.authentication.termsChecked || !appEnvironment.viewModels.authentication.privacyChecked }
 
     var body: some View {
         ScrollView {
@@ -34,8 +30,8 @@ struct RegistrationView: View {
                                     topTitle: "Date of birth",
                                     placeholder: "Date of birth")
 
-                    CustomPicker(topTitle: "Nation", selection: $selectedCountry, items: {
-                        countries
+                    CustomPicker(topTitle: "Nation", selection: appEnvironment.viewModels.$authentication.selectedCountry, items: {
+                        appEnvironment.viewModels.authentication.countries
                     }, placeholder: "Select your country") { item in
                         Text(item.name)
                     } getImageView: { item in
@@ -61,7 +57,7 @@ struct RegistrationView: View {
 
                     Spacer()
                         .frame(height: 16)
-                    
+
                     checkStack
 
                     Button("Sign in") {
@@ -88,12 +84,12 @@ struct RegistrationView: View {
 private extension RegistrationView {
     var checkStack: some View {
         VStack {
-            Toggle(isOn: $termsChecked) {
+            Toggle(isOn: appEnvironment.viewModels.$authentication.termsChecked) {
                 HStack(spacing: 4) {
                     Text("Accept")
                         .foregroundStyle(.black)
                         .font(.system(size: 16))
-                    
+
                     Text("terms and conditions")
                         .foregroundStyle(.blue)
                         .font(.system(size: 16))
@@ -103,13 +99,13 @@ private extension RegistrationView {
             .toggleStyle(CheckboxToggleStyle())
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 5)
-            
-            Toggle(isOn: $privacyChecked) {
+
+            Toggle(isOn: appEnvironment.viewModels.$authentication.privacyChecked) {
                 HStack(spacing: 4) {
                     Text("Accept")
                         .foregroundStyle(.black)
                         .font(.system(size: 16))
-                    
+
                     Text("privacy policy")
                         .foregroundStyle(.blue)
                         .font(.system(size: 16))
@@ -132,24 +128,6 @@ private extension RegistrationView {
         appEnvironment.viewModels.authentication.clearFields()
         router.navigateBack()
     }
-
-    var countries: [Country] {
-        let current = Locale.current.region?.identifier
-
-        let locales = Locale.Region.isoRegions
-            .compactMap { Country(id: $0.identifier, name: Locale.current.localizedString(forRegionCode: $0.identifier) ?? "", image: $0.identifier)
-            }
-
-        let currentCountry: Country = .init(id: current ?? "", name: Locale.current.localizedString(forRegionCode: current ?? "") ?? "", image: current ?? "")
-
-        return [currentCountry] + locales
-    }
-}
-
-private struct Country: Hashable, Equatable, Identifiable {
-    var id: String
-    var name: String
-    var image: String?
 }
 
 #Preview {

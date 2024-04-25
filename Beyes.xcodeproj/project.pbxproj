@@ -50,6 +50,7 @@
 		AEEB7CA42BB8197000A3E2CD /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB7CA32BB8197000A3E2CD /* Settings.swift */; };
 		AEEB7CA72BB81CBB00A3E2CD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEB7CA62BB81CBB00A3E2CD /* Color.swift */; };
 		AEF464692BDB0A8300A19DCF /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF464682BDB0A8300A19DCF /* Checkbox.swift */; };
+		AEF4646B2BDB132500A19DCF /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4646A2BDB132500A19DCF /* Country.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		AEEB7CA32BB8197000A3E2CD /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AEEB7CA62BB81CBB00A3E2CD /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		AEF464682BDB0A8300A19DCF /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		AEF4646A2BDB132500A19DCF /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				AEEB7C8B2BB8095D00A3E2CD /* Shop.swift */,
+				AEF4646A2BDB132500A19DCF /* Country.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				AEEB1A4E2BCAB62C00CEF98A /* Buttons.swift in Sources */,
 				AEEB7C752BB8089E00A3E2CD /* BeyesApp.swift in Sources */,
 				AE36D1572BC9DD0A00E910F8 /* APIErrors.swift in Sources */,
+				AEF4646B2BDB132500A19DCF /* Country.swift in Sources */,
 				AE1A3A382BCDB2430047488E /* SafeArea.swift in Sources */,
 				AEEB1A472BCAA9B700CEF98A /* LoadingView.swift in Sources */,
 				AEEB1A4C2BCAAE1300CEF98A /* Void.swift in Sources */,

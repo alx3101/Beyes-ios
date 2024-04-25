@@ -1,10 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Accept" : {
+
+    },
     "Add Item" : {
 
     },
     "Beyes" : {
+
+    },
+    "Buy a pack of Airtags" : {
 
     },
     "Dimenticato la password?" : {
@@ -13,7 +19,16 @@
     "home" : {
 
     },
+    "Il campo (field.value) non è valido." : {
+
+    },
+    "Il campo (field.value) non può essere vuoto." : {
+
+    },
     "Item at %@" : {
+
+    },
+    "Le password non coincidono" : {
 
     },
     "main" : {
@@ -22,10 +37,16 @@
     "Non hai un account?" : {
 
     },
+    "privacy policy" : {
+
+    },
     "Registrati" : {
 
     },
     "Select an item" : {
+
+    },
+    "Si è verificato un errore sconosciuto." : {
 
     },
     "Sign in" : {
@@ -44,6 +65,9 @@
           }
         }
       }
+    },
+    "terms and conditions" : {
+
     }
   },
   "version" : "1.0"
