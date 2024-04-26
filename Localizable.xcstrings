@@ -13,6 +13,9 @@
     "Buy a pack of Airtags" : {
 
     },
+    "Checked" : {
+
+    },
     "Dimenticato la password?" : {
 
     },
@@ -67,6 +70,9 @@
       }
     },
     "terms and conditions" : {
+
+    },
+    "Unchecked" : {
 
     }
   },

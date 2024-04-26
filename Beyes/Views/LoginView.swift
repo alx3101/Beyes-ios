@@ -10,22 +10,23 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var router: Router
     @Environment(\.appEnvironment) var appEnvironment
-
     @State private var action: Loadable<Void> = .notRequested
+    @State private var email: String = ""
+    @State private var password: String = ""
 
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
                 .frame(height: 150)
 
-            CustomTextField(text: appEnvironment.viewModels.$authentication.email,
+            CustomTextField(text: $email,
                             topTitle: "E-mail",
                             placeholder: "Your e-mail")
 
             Spacer()
                 .frame(height: 16)
 
-            CustomSecureField(text: appEnvironment.viewModels.$authentication.password,
+            CustomSecureField(text: $password,
                               topTitle: "Password",
                               placeholder: "Your password")
 
@@ -75,7 +76,7 @@ struct LoginView: View {
 
 private extension LoginView {
     func login() {
-        appEnvironment.viewModels.authentication.signIn { action = $0 }
+        appEnvironment.interactors.auth.signIn(email: email, password: password) { action = $0 }
         router.setMain(.home)
     }
 }

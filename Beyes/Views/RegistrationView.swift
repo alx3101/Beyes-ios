@@ -13,7 +13,19 @@ struct RegistrationView: View {
     @Environment(\.appEnvironment) var appEnvironment
 
     @State private var action: Loadable<Void> = .notRequested
-    var isButtonDisabled: Bool { !appEnvironment.viewModels.authentication.termsChecked || !appEnvironment.viewModels.authentication.privacyChecked }
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var confirmedPassword: String = ""
+    @State private var fullName: String = ""
+    @State private var country: String = ""
+    @State private var dateOfBirth: String = ""
+    @State private var selectedCountry: Country? = nil
+    @State private var isPickerVisible = false
+    @State private var termsChecked = false
+    @State private var privacyChecked = false
+    
+    
+    var isButtonDisabled: Bool { !termsChecked || !privacyChecked }
 
     var body: some View {
         ScrollView {
@@ -22,16 +34,16 @@ struct RegistrationView: View {
                     Spacer()
                         .frame(height: 25)
 
-                    CustomTextField(text: appEnvironment.viewModels.$authentication.fullName,
+                    CustomTextField(text: $fullName,
                                     topTitle: "Full name",
                                     placeholder: "Full name")
 
-                    CustomTextField(text: appEnvironment.viewModels.$authentication.dateOfBirth,
+                    CustomTextField(text: $dateOfBirth,
                                     topTitle: "Date of birth",
                                     placeholder: "Date of birth")
 
-                    CustomPicker(topTitle: "Nation", selection: appEnvironment.viewModels.$authentication.selectedCountry, items: {
-                        appEnvironment.viewModels.authentication.countries
+                    CustomPicker(topTitle: "Nation", selection: $selectedCountry, items: {
+                        countries
                     }, placeholder: "Select your country") { item in
                         Text(item.name)
                     } getImageView: { item in
@@ -43,15 +55,15 @@ struct RegistrationView: View {
                     }
                     .zIndex(1)
 
-                    CustomTextField(text: appEnvironment.viewModels.$authentication.email,
+                    CustomTextField(text: $email,
                                     topTitle: "E-mail",
                                     placeholder: "E-mail")
 
-                    CustomSecureField(text: appEnvironment.viewModels.$authentication.password,
+                    CustomSecureField(text: $password,
                                       topTitle: "Password",
                                       placeholder: "Password")
 
-                    CustomSecureField(text: appEnvironment.viewModels.$authentication.confirmedPassword,
+                    CustomSecureField(text: $confirmedPassword,
                                       topTitle: "Confirm password",
                                       placeholder: "Confirm password")
 
@@ -84,7 +96,7 @@ struct RegistrationView: View {
 private extension RegistrationView {
     var checkStack: some View {
         VStack {
-            Toggle(isOn: appEnvironment.viewModels.$authentication.termsChecked) {
+            Toggle(isOn: $termsChecked) {
                 HStack(spacing: 4) {
                     Text("Accept")
                         .foregroundStyle(.black)
@@ -96,11 +108,12 @@ private extension RegistrationView {
                 }
                 .onTapGesture {}
             }
-            .toggleStyle(CheckboxToggleStyle())
+            .toggleStyle(CheckToggleStyle())
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 5)
+            .id(UUID())
 
-            Toggle(isOn: appEnvironment.viewModels.$authentication.privacyChecked) {
+            Toggle(isOn: $privacyChecked) {
                 HStack(spacing: 4) {
                     Text("Accept")
                         .foregroundStyle(.black)
@@ -110,23 +123,66 @@ private extension RegistrationView {
                         .foregroundStyle(.blue)
                         .font(.system(size: 16))
                 }
-                .onTapGesture {}
             }
-            .toggleStyle(CheckboxToggleStyle())
+            .toggleStyle(CheckToggleStyle())
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 5)
+            .id(UUID())
         }
     }
 }
 
 private extension RegistrationView {
     func signIn() {
-        appEnvironment.viewModels.authentication.signUp { action = $0 }
+        appEnvironment.interactors.auth.signUp(email: email, password: password) { action = $0 }
     }
 
     func pop() {
-        appEnvironment.viewModels.authentication.clearFields()
         router.navigateBack()
+    }
+    
+    var countries: [Country] {
+        let current = Locale.current.region?.identifier
+
+        let locales = Locale.Region.isoRegions
+            .compactMap { Country(id: $0.identifier, name: Locale.current.localizedString(forRegionCode: $0.identifier) ?? "", image: $0.identifier)
+            }
+
+        let currentCountry: Country = .init(id: current ?? "", name: Locale.current.localizedString(forRegionCode: current ?? "") ?? "", image: current ?? "")
+
+        return [currentCountry] + locales
+    }
+    
+    private func emptyFields() -> Error? {
+        guard email.isEmpty else {
+            return AuthError.empty(Field.email)
+        }
+
+        guard password.isEmpty else {
+            return AuthError.empty(Field.password)
+        }
+
+        guard confirmedPassword.isEmpty else {
+            return AuthError.empty(Field.confirmPassword)
+        }
+
+        guard password == confirmedPassword else {
+            return AuthError.passwordNotMatch
+        }
+
+        guard fullName.isEmpty else {
+            return AuthError.empty(Field.fullName)
+        }
+
+        guard country.isEmpty else {
+            return AuthError.empty(Field.country)
+        }
+
+        guard dateOfBirth.isEmpty else {
+            return AuthError.empty(Field.dateOfBirth)
+        }
+
+        return nil
     }
 }
 

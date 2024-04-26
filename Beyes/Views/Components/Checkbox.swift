@@ -8,27 +8,21 @@
 import Foundation
 import SwiftUI
 
-struct CheckboxToggleStyle: ToggleStyle {
+struct CheckToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 5.0)
-                .stroke(lineWidth: 2)
-                .frame(width: 25, height: 25)
-                .cornerRadius(5.0)
-                .overlay {
-                    withAnimation {
-                        Image(systemName: configuration.isOn ? "checkmark" : "")
-                    }
-                }
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        configuration.isOn.toggle()
-                    }
-                }
-                .padding(.trailing, 15)
-
-            configuration.label
+        Button {
+            configuration.isOn.toggle()
+        } label: {
+            Label {
+                configuration.label
+            } icon: {
+                Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "circle")
+                    .foregroundStyle(configuration.isOn ? Color.accentColor : .secondary)
+                    .accessibility(label: Text(configuration.isOn ? "Checked" : "Unchecked"))
+                    .imageScale(.large)
+            }
         }
+        .buttonStyle(.plain)
     }
 }
 
@@ -40,7 +34,7 @@ struct CheckboxToggleStyle: ToggleStyle {
                 Spacer()
             }
         }
-        .toggleStyle(CheckboxToggleStyle())
+        .toggleStyle(CheckToggleStyle())
         .frame(maxWidth: .infinity)
     }
 })

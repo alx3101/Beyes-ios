@@ -14,7 +14,7 @@
 		AE36D1542BC9D06D00E910F8 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1532BC9D06D00E910F8 /* AuthServices.swift */; };
 		AE36D1572BC9DD0A00E910F8 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1562BC9DD0A00E910F8 /* APIErrors.swift */; };
 		AE36D1612BC9E20700E910F8 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = AE36D1602BC9E20700E910F8 /* SwiftyBeaver */; };
-		AE36D1632BC9E49C00E910F8 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1622BC9E49C00E910F8 /* AuthViewModel.swift */; };
+		AE36D1632BC9E49C00E910F8 /* AuthInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1622BC9E49C00E910F8 /* AuthInteractor.swift */; };
 		AE36D1652BC9E5B300E910F8 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1642BC9E5B300E910F8 /* Loadable.swift */; };
 		AE9576F72BBDD2B700CDD267 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576F62BBDD2B700CDD267 /* Dependencies.swift */; };
 		AE9576FD2BBDD74500CDD267 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576FC2BBDD74500CDD267 /* RouteView.swift */; };
@@ -59,7 +59,7 @@
 		AE2ADAB62BC2C2F500822383 /* ShopsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsService.swift; sourceTree = "<group>"; };
 		AE36D1532BC9D06D00E910F8 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
 		AE36D1562BC9DD0A00E910F8 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
-		AE36D1622BC9E49C00E910F8 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		AE36D1622BC9E49C00E910F8 /* AuthInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInteractor.swift; sourceTree = "<group>"; };
 		AE36D1642BC9E5B300E910F8 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		AE9576F62BBDD2B700CDD267 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		AE9576FC2BBDD74500CDD267 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
@@ -129,18 +129,18 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
-		AE36D1662BC9EAF800E910F8 /* ViewModels */ = {
+		AE36D1662BC9EAF800E910F8 /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
-				AE36D1622BC9E49C00E910F8 /* AuthViewModel.swift */,
+				AE36D1622BC9E49C00E910F8 /* AuthInteractor.swift */,
 			);
-			path = ViewModels;
+			path = Interactors;
 			sourceTree = "<group>";
 		};
 		AE9576F42BBDD29F00CDD267 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				AE36D1662BC9EAF800E910F8 /* ViewModels */,
+				AE36D1662BC9EAF800E910F8 /* Interactors */,
 				AE9576F52BBDD2A900CDD267 /* Managers */,
 				AEEB7C982BB80A2100A3E2CD /* Services */,
 				AE9576F62BBDD2B700CDD267 /* Dependencies.swift */,
@@ -424,7 +424,7 @@
 				AEEB7CA72BB81CBB00A3E2CD /* Color.swift in Sources */,
 				AE9576FD2BBDD74500CDD267 /* RouteView.swift in Sources */,
 				AEF464692BDB0A8300A19DCF /* Checkbox.swift in Sources */,
-				AE36D1632BC9E49C00E910F8 /* AuthViewModel.swift in Sources */,
+				AE36D1632BC9E49C00E910F8 /* AuthInteractor.swift in Sources */,
 				AE36D1542BC9D06D00E910F8 /* AuthServices.swift in Sources */,
 				AEEB7C772BB8089E00A3E2CD /* ContentView.swift in Sources */,
 				AE36D1652BC9E5B300E910F8 /* Loadable.swift in Sources */,

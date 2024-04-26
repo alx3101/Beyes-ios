@@ -9,36 +9,18 @@ import Combine
 import Foundation
 import SwiftUI
 
-protocol AuthViewModelProvider {
+protocol AuthVInteractorProvider {
     var currentSession: Bool? { get }
-    func signIn(action: @escaping (Loadable<Void>) -> Void)
-    func signUp(action: @escaping (Loadable<Void>) -> Void)
+    func signIn(email: String, password: String, action: @escaping (Loadable<Void>) -> Void)
+    func signUp(email: String, password: String, action: @escaping (Loadable<Void>) -> Void)
     func logout(action: @escaping (Loadable<Void>) -> Void)
 }
 
-class AuthViewModel: AuthViewModelProvider, ObservableObject {
+class AuthInteractor: AuthVInteractorProvider, ObservableObject {
     @Published var currentSession: Bool?
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var confirmedPassword: String = ""
-    @Published var fullName: String = ""
-    @Published var country: String = ""
-    @Published var dateOfBirth: String = ""
-    @Published var selectedCountry: Country? = nil
-    @Published var isPickerVisible = false
-    @Published var termsChecked = false
-    @Published var privacyChecked = false
-    var countries: [Country] {
-        let current = Locale.current.region?.identifier
+    
 
-        let locales = Locale.Region.isoRegions
-            .compactMap { Country(id: $0.identifier, name: Locale.current.localizedString(forRegionCode: $0.identifier) ?? "", image: $0.identifier)
-            }
-
-        let currentCountry: Country = .init(id: current ?? "", name: Locale.current.localizedString(forRegionCode: current ?? "") ?? "", image: current ?? "")
-
-        return [currentCountry] + locales
-    }
+   
 
     private let service: AuthServices
     var cancellables = Set<AnyCancellable>()
@@ -55,7 +37,7 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
             .store(in: &cancellables)
     }
 
-    func signIn(action: @escaping (Loadable<Void>) -> Void) {
+    func signIn(email: String, password: String, action: @escaping (Loadable<Void>) -> Void) {
         action(.loading)
         Task {
             do {
@@ -67,14 +49,10 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
         }
     }
 
-    func signUp(action: @escaping (Loadable<Void>) -> Void) {
+    func signUp(email: String, password: String, action: @escaping (Loadable<Void>) -> Void) {
         action(.loading)
         Task {
             do {
-                if let error = emptyFields() {
-                    action(.failed(error))
-                }
-
                 try await service.signUp(email: email, password: password)
             } catch {
                 action(.failed(error))
@@ -91,47 +69,6 @@ class AuthViewModel: AuthViewModelProvider, ObservableObject {
                 action(.failed(error))
             }
         }
-    }
-
-    private func emptyFields() -> Error? {
-        guard email.isEmpty else {
-            return AuthViewModelError.empty(Field.email)
-        }
-
-        guard password.isEmpty else {
-            return AuthViewModelError.empty(Field.password)
-        }
-
-        guard confirmedPassword.isEmpty else {
-            return AuthViewModelError.empty(Field.confirmPassword)
-        }
-
-        guard password == confirmedPassword else {
-            return AuthViewModelError.passwordNotMatch
-        }
-
-        guard fullName.isEmpty else {
-            return AuthViewModelError.empty(Field.fullName)
-        }
-
-        guard country.isEmpty else {
-            return AuthViewModelError.empty(Field.country)
-        }
-
-        guard dateOfBirth.isEmpty else {
-            return AuthViewModelError.empty(Field.dateOfBirth)
-        }
-
-        return nil
-    }
-
-    func clearFields() {
-        email = ""
-        password = ""
-        confirmedPassword = ""
-        fullName = ""
-        country = ""
-        dateOfBirth = ""
     }
 }
 
@@ -161,7 +98,7 @@ enum Field {
     }
 }
 
-enum AuthViewModelError: Error {
+enum AuthError: Error {
     case empty(Field)
     case invalid(Field)
     case passwordNotMatch

@@ -19,11 +19,11 @@ extension EnvironmentValues {
     }
 }
 
-class ViewModels: ObservableObject {
-    @ObservedObject var authentication: AuthViewModel
+class Interactors: ObservableObject {
+    @ObservedObject var auth: AuthInteractor
 
     init(services: Services) {
-        authentication = AuthViewModel(authServices: services.authServices)
+        auth = AuthInteractor(authServices: services.authServices)
     }
 }
 
@@ -42,11 +42,11 @@ class Services: ObservableObject {
 }
 
 final class AppEnvironment: ObservableObject {
-    let viewModels: ViewModels
+    let interactors: Interactors
     let services: Services
 
     init() {
         services = Services()
-        viewModels = ViewModels(services: services)
+        interactors = Interactors(services: services)
     }
 }
