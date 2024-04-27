@@ -31,7 +31,7 @@ struct Splash: View {
         )
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                appEnvironment.viewModels.authentication.$currentSession
+                appEnvironment.interactors.auth.$currentSession
                     .sink { session in
                         if let currentSession = session {
                             if currentSession {
@@ -43,7 +43,7 @@ struct Splash: View {
                             }
                         }
                     }
-                    .store(in: &appEnvironment.viewModels.authentication.cancellables)
+                    .store(in: &appEnvironment.interactors.auth.cancellables)
             }
         }
     }

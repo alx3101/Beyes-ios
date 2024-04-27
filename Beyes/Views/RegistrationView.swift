@@ -23,8 +23,7 @@ struct RegistrationView: View {
     @State private var isPickerVisible = false
     @State private var termsChecked = false
     @State private var privacyChecked = false
-    
-    
+
     var isButtonDisabled: Bool { !termsChecked || !privacyChecked }
 
     var body: some View {
@@ -106,7 +105,6 @@ private extension RegistrationView {
                         .foregroundStyle(.blue)
                         .font(.system(size: 16))
                 }
-                .onTapGesture {}
             }
             .toggleStyle(CheckToggleStyle())
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -140,7 +138,7 @@ private extension RegistrationView {
     func pop() {
         router.navigateBack()
     }
-    
+
     var countries: [Country] {
         let current = Locale.current.region?.identifier
 
@@ -152,7 +150,7 @@ private extension RegistrationView {
 
         return [currentCountry] + locales
     }
-    
+
     private func emptyFields() -> Error? {
         guard email.isEmpty else {
             return AuthError.empty(Field.email)

@@ -1,5 +1,5 @@
 //
-//  AuthViewModel.swift
+//  AuthInteractor.swift
 //  Beyes
 //
 //  Created by Alex Popa on 12/04/24.
@@ -18,9 +18,6 @@ protocol AuthVInteractorProvider {
 
 class AuthInteractor: AuthVInteractorProvider, ObservableObject {
     @Published var currentSession: Bool?
-    
-
-   
 
     private let service: AuthServices
     var cancellables = Set<AnyCancellable>()
