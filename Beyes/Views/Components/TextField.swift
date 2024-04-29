@@ -10,13 +10,16 @@ import SwiftUI
 
 struct CustomTextField: View {
     @Binding var text: String
+    @Binding var error: Error?
     let topTitle: String?
     let placeholder: String
 
     init(text: Binding<String>,
+         error: Binding<Error?> = .constant(nil),
          topTitle: String? = nil,
          placeholder: String) {
         _text = text
+        _error = error
         self.topTitle = topTitle
         self.placeholder = placeholder
     }
@@ -36,22 +39,29 @@ struct CustomTextField: View {
                 .frame(height: 40)
                 .background {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.regularMaterial)
+                        .fill(error != nil ? Color.red.opacity(0.1) : .white)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(error != nil ? Color.red : .gray.opacity(0.25), lineWidth: 0.5)
+                        )
                 }
         }
     }
 }
 
 struct CustomSecureField: View {
-    @Binding var text: String
     @State private var passwordHidden: Bool = true
+    @Binding var text: String
+    @Binding var error: Error?
     let topTitle: String?
     let placeholder: String
 
     init(text: Binding<String>,
+         error: Binding<Error?> = .constant(nil),
          topTitle: String? = nil,
          placeholder: String) {
         _text = text
+        _error = error
         self.topTitle = topTitle
         self.placeholder = placeholder
     }
@@ -88,7 +98,11 @@ struct CustomSecureField: View {
             .frame(height: 40)
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.regularMaterial)
+                    .fill(error != nil ? Color.red.opacity(0.1) : .white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(error != nil ? Color.red : .gray.opacity(0.25), lineWidth: 0.5)
+                    )
             }
         }
     }
