@@ -25,12 +25,12 @@ struct RegistrationView: View {
 
     // MARK: Errors
 
-    @State private var emailError: Error? = nil
-    @State private var passwordError: Error? = nil
-    @State private var confirmPasswordError: Error? = nil
-    @State private var fullNameError: Error? = nil
-    @State private var countryError: Error? = nil
-    @State private var dateOfBirthError: Error? = nil
+    @State private var emailError: String? = nil
+    @State private var passwordError: String? = nil
+    @State private var confirmPasswordError: String? = nil
+    @State private var fullNameError: String? = nil
+    @State private var countryError: String? = nil
+    @State private var dateOfBirthError: String? = nil
 
     var isButtonDisabled: Bool { !termsChecked || !privacyChecked }
 
@@ -173,37 +173,47 @@ private extension RegistrationView {
 
     private func checkFields() -> Bool {
         guard !email.isEmpty else {
-            emailError = AuthError.empty(Field.email)
+            emailError = AuthError.empty(Field.email).localizedDescription
             return false
         }
 
         guard !password.isEmpty else {
-            passwordError = AuthError.empty(Field.password)
+            passwordError = AuthError.empty(Field.password).localizedDescription
             return false
         }
 
         guard !confirmedPassword.isEmpty else {
-            confirmPasswordError = AuthError.empty(Field.confirmPassword)
+            confirmPasswordError = AuthError.empty(Field.confirmPassword).localizedDescription
             return false
         }
 
         guard password == confirmedPassword else {
-            confirmPasswordError = AuthError.invalid(Field.confirmPassword)
+            confirmPasswordError = AuthError.invalid(Field.confirmPassword).localizedDescription
             return false
         }
 
         guard !fullName.isEmpty else {
-            fullNameError = AuthError.empty(Field.fullName)
+            fullNameError = AuthError.empty(Field.fullName).localizedDescription
             return false
         }
 
-        guard let selectedCountry else {
-            countryError = AuthError.empty(Field.country)
+        guard selectedCountry != nil else {
+            countryError = AuthError.empty(Field.country).localizedDescription
             return false
         }
 
         guard !dateOfBirth.isEmpty else {
-            dateOfBirthError = AuthError.empty(Field.dateOfBirth)
+            dateOfBirthError = AuthError.empty(Field.dateOfBirth).localizedDescription
+            return false
+        }
+
+        guard email.isValidEmail() else {
+            emailError = AuthError.invalid(Field.email).localizedDescription
+            return false
+        }
+
+        guard confirmedPassword.isValidPassword() else {
+            passwordError = AuthError.invalid(Field.confirmPassword).localizedDescription
             return false
         }
 

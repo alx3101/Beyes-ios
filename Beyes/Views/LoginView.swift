@@ -12,7 +12,9 @@ struct LoginView: View {
     @Environment(\.appEnvironment) var appEnvironment
     @State private var action: Loadable<Void> = .notRequested
     @State private var email: String = ""
+    @State private var emailError: String? = nil
     @State private var password: String = ""
+    @State private var passwordError: String? = nil
 
     var body: some View {
         VStack(spacing: 0) {
@@ -20,6 +22,7 @@ struct LoginView: View {
                 .frame(height: 150)
 
             CustomTextField(text: $email,
+                            error: $emailError,
                             topTitle: "E-mail",
                             placeholder: "Your e-mail")
 
@@ -27,6 +30,7 @@ struct LoginView: View {
                 .frame(height: 16)
 
             CustomSecureField(text: $password,
+                              error: $passwordError,
                               topTitle: "Password",
                               placeholder: "Your password")
 
@@ -37,7 +41,7 @@ struct LoginView: View {
                 login()
             }
             .padding(.vertical, 10)
-            .buttonStyle(Primary(type: .pill))
+            .buttonStyle(Primary(type: .regular))
 
             HStack {
                 Button(action: {}, label: {
