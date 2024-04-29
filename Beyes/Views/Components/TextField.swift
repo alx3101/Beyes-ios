@@ -52,6 +52,9 @@ struct CustomTextField: View {
                     .padding(.leading, 4)
             }
         }
+        .onChange(of: text, perform: { _ in
+            error = nil
+        })
     }
 }
 
@@ -118,6 +121,9 @@ struct CustomSecureField: View {
                     .padding(.leading, 4)
             }
         }
+        .onChange(of: text, perform: { _ in
+            error = nil
+        })
     }
 }
 
