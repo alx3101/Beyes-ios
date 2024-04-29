@@ -17,6 +17,7 @@ struct BeyesApp: App {
     init() {
         let console = ConsoleDestination()
         logger.addDestination(console)
+        UINavigationBar.changeAppearance(clear: false)
     }
 
     var body: some Scene {

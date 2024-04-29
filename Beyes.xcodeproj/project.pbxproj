@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE06D9BD2BE04A5E007E9A5E /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE06D9BC2BE04A5E007E9A5E /* NavigationBar.swift */; };
+		AE06D9BF2BE04C23007E9A5E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE06D9BE2BE04C23007E9A5E /* Strings.swift */; };
 		AE1A3A382BCDB2430047488E /* SafeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1A3A372BCDB2430047488E /* SafeArea.swift */; };
 		AE1A3A3A2BCDC4990047488E /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1A3A392BCDC4990047488E /* TopBar.swift */; };
 		AE2ADAB72BC2C2F500822383 /* ShopsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2ADAB62BC2C2F500822383 /* ShopsService.swift */; };
@@ -54,6 +56,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE06D9BC2BE04A5E007E9A5E /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		AE06D9BE2BE04C23007E9A5E /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		AE1A3A372BCDB2430047488E /* SafeArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArea.swift; sourceTree = "<group>"; };
 		AE1A3A392BCDC4990047488E /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		AE2ADAB62BC2C2F500822383 /* ShopsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsService.swift; sourceTree = "<group>"; };
@@ -280,6 +284,8 @@
 				AEEB1A4B2BCAAE1300CEF98A /* Void.swift */,
 				AEEB7CA62BB81CBB00A3E2CD /* Color.swift */,
 				AE1A3A372BCDB2430047488E /* SafeArea.swift */,
+				AE06D9BC2BE04A5E007E9A5E /* NavigationBar.swift */,
+				AE06D9BE2BE04C23007E9A5E /* Strings.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -420,12 +426,14 @@
 				AEEB1A452BCA9F9A00CEF98A /* TextField.swift in Sources */,
 				AEEB7C9A2BB80A3C00A3E2CD /* SupabaseServices.swift in Sources */,
 				AEEB7C7E2BB8089F00A3E2CD /* Persistence.swift in Sources */,
+				AE06D9BD2BE04A5E007E9A5E /* NavigationBar.swift in Sources */,
 				AEEB7C9F2BB80CC700A3E2CD /* Main.swift in Sources */,
 				AEEB7CA72BB81CBB00A3E2CD /* Color.swift in Sources */,
 				AE9576FD2BBDD74500CDD267 /* RouteView.swift in Sources */,
 				AEF464692BDB0A8300A19DCF /* Checkbox.swift in Sources */,
 				AE36D1632BC9E49C00E910F8 /* AuthInteractor.swift in Sources */,
 				AE36D1542BC9D06D00E910F8 /* AuthServices.swift in Sources */,
+				AE06D9BF2BE04C23007E9A5E /* Strings.swift in Sources */,
 				AEEB7C772BB8089E00A3E2CD /* ContentView.swift in Sources */,
 				AE36D1652BC9E5B300E910F8 /* Loadable.swift in Sources */,
 				AEEB7C892BB8091F00A3E2CD /* Home.swift in Sources */,
