@@ -10,12 +10,12 @@ import SwiftUI
 
 struct CustomTextField: View {
     @Binding var text: String
-    @Binding var error: Error?
+    @Binding var error: String?
     let topTitle: String?
     let placeholder: String
 
     init(text: Binding<String>,
-         error: Binding<Error?> = .constant(nil),
+         error: Binding<String?> = .constant(nil),
          topTitle: String? = nil,
          placeholder: String) {
         _text = text
@@ -45,6 +45,12 @@ struct CustomTextField: View {
                                 .stroke(error != nil ? Color.red : .gray.opacity(0.25), lineWidth: 0.5)
                         )
                 }
+            if let error {
+                Text(error)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.threateningRed)
+                    .padding(.leading, 4)
+            }
         }
     }
 }
@@ -52,12 +58,12 @@ struct CustomTextField: View {
 struct CustomSecureField: View {
     @State private var passwordHidden: Bool = true
     @Binding var text: String
-    @Binding var error: Error?
+    @Binding var error: String?
     let topTitle: String?
     let placeholder: String
 
     init(text: Binding<String>,
-         error: Binding<Error?> = .constant(nil),
+         error: Binding<String?> = .constant(nil),
          topTitle: String? = nil,
          placeholder: String) {
         _text = text
@@ -103,6 +109,13 @@ struct CustomSecureField: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(error != nil ? Color.red : .gray.opacity(0.25), lineWidth: 0.5)
                     )
+            }
+
+            if let error {
+                Text(error)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.threateningRed)
+                    .padding(.leading, 4)
             }
         }
     }
