@@ -17,12 +17,20 @@ struct RegistrationView: View {
     @State private var password: String = ""
     @State private var confirmedPassword: String = ""
     @State private var fullName: String = ""
-    @State private var country: String = ""
     @State private var dateOfBirth: String = ""
     @State private var selectedCountry: Country? = nil
     @State private var isPickerVisible = false
     @State private var termsChecked = false
     @State private var privacyChecked = false
+
+    // MARK: Errors
+
+    @State private var emailError: Error? = nil
+    @State private var passwordError: Error? = nil
+    @State private var confirmPasswordError: Error? = nil
+    @State private var fullNameError: Error? = nil
+    @State private var countryError: Error? = nil
+    @State private var dateOfBirthError: Error? = nil
 
     var isButtonDisabled: Bool { !termsChecked || !privacyChecked }
 
@@ -34,10 +42,12 @@ struct RegistrationView: View {
                         .frame(height: 25)
 
                     CustomTextField(text: $fullName,
+                                    error: $fullNameError,
                                     topTitle: "Full name",
                                     placeholder: "Full name")
 
                     CustomTextField(text: $dateOfBirth,
+                                    error: $dateOfBirthError,
                                     topTitle: "Date of birth",
                                     placeholder: "Date of birth")
 
@@ -55,14 +65,17 @@ struct RegistrationView: View {
                     .zIndex(1)
 
                     CustomTextField(text: $email,
+                                    error: $emailError,
                                     topTitle: "E-mail",
                                     placeholder: "E-mail")
 
                     CustomSecureField(text: $password,
+                                      error: $passwordError,
                                       topTitle: "Password",
                                       placeholder: "Password")
 
                     CustomSecureField(text: $confirmedPassword,
+                                      error: $confirmPasswordError,
                                       topTitle: "Confirm password",
                                       placeholder: "Confirm password")
 
@@ -72,7 +85,7 @@ struct RegistrationView: View {
                     checkStack
 
                     Button("Sign in") {
-                        print("Button pressed!")
+                        signIn()
                     }
                     .padding(.vertical, 20)
                     .buttonStyle(Primary(type: .regular))
@@ -132,7 +145,14 @@ private extension RegistrationView {
 
 private extension RegistrationView {
     func signIn() {
-        appEnvironment.interactors.auth.signUp(email: email, password: password) { action = $0 }
+        guard checkFields() else {
+            return
+        }
+        appEnvironment.interactors.auth.signUp(email: email, password: password) { action = $0
+            if case .loaded = $0 {
+                router.setMain(.home)
+            }
+        }
     }
 
     func pop() {
@@ -151,36 +171,43 @@ private extension RegistrationView {
         return [currentCountry] + locales
     }
 
-    private func emptyFields() -> Error? {
-        guard email.isEmpty else {
-            return AuthError.empty(Field.email)
+    private func checkFields() -> Bool {
+        guard !email.isEmpty else {
+            emailError = AuthError.empty(Field.email)
+            return false
         }
 
-        guard password.isEmpty else {
-            return AuthError.empty(Field.password)
+        guard !password.isEmpty else {
+            passwordError = AuthError.empty(Field.password)
+            return false
         }
 
-        guard confirmedPassword.isEmpty else {
-            return AuthError.empty(Field.confirmPassword)
+        guard !confirmedPassword.isEmpty else {
+            confirmPasswordError = AuthError.empty(Field.confirmPassword)
+            return false
         }
 
         guard password == confirmedPassword else {
-            return AuthError.passwordNotMatch
+            confirmPasswordError = AuthError.invalid(Field.confirmPassword)
+            return false
         }
 
-        guard fullName.isEmpty else {
-            return AuthError.empty(Field.fullName)
+        guard !fullName.isEmpty else {
+            fullNameError = AuthError.empty(Field.fullName)
+            return false
         }
 
-        guard country.isEmpty else {
-            return AuthError.empty(Field.country)
+        guard let selectedCountry else {
+            countryError = AuthError.empty(Field.country)
+            return false
         }
 
-        guard dateOfBirth.isEmpty else {
-            return AuthError.empty(Field.dateOfBirth)
+        guard !dateOfBirth.isEmpty else {
+            dateOfBirthError = AuthError.empty(Field.dateOfBirth)
+            return false
         }
 
-        return nil
+        return true
     }
 }
 
