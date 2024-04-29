@@ -50,7 +50,11 @@ struct CustomPicker<SelectionValue, Content>: View where SelectionValue == Conte
             .frame(height: buttonHeight)
             .background {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.regularMaterial)
+                    .fill(.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.gray.opacity(0.25), lineWidth: 0.5)
+                    )
             }
             .contentShape(Rectangle())
             .onTapGesture {
