@@ -37,6 +37,11 @@ struct LoginView: View {
             Spacer()
                 .frame(height: 16)
 
+            if let error = action.hasError {
+                Text(error.localizedDescription)
+                    .foregroundStyle(.red)
+            }
+
             Button("Sign in") {
                 login()
             }
@@ -80,8 +85,26 @@ struct LoginView: View {
 
 private extension LoginView {
     func login() {
+        guard checkFields() else {
+            return
+        }
+
         appEnvironment.interactors.auth.signIn(email: email, password: password) { action = $0 }
         router.setMain(.home)
+    }
+
+    func checkFields() -> Bool {
+        guard !email.isEmpty else {
+            emailError = AuthError.empty(Field.email).localizedDescription
+            return false
+        }
+
+        guard !password.isEmpty else {
+            passwordError = AuthError.empty(Field.password).localizedDescription
+            return false
+        }
+
+        return true
     }
 }
 
