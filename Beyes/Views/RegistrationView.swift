@@ -5,6 +5,7 @@
 //  Created by Alex Popa on 14/04/24.
 //
 
+import BottomSheet
 import FlagKit
 import SwiftUI
 
@@ -22,6 +23,8 @@ struct RegistrationView: View {
     @State private var isPickerVisible = false
     @State private var termsChecked = false
     @State private var privacyChecked = false
+    @State private var birthDate = Date.now
+    @State private var birthPicker: BottomSheetPosition = .hidden
 
     // MARK: Errors
 
@@ -50,6 +53,10 @@ struct RegistrationView: View {
                                     error: $dateOfBirthError,
                                     topTitle: "Date of birth",
                                     placeholder: "Date of birth")
+                        .disabled(true)
+                        .onTapGesture {
+                            birthPicker = .dynamic
+                        }
 
                     CustomPicker(topTitle: "Nation", selection: $selectedCountry, items: {
                         countries
@@ -118,6 +125,28 @@ struct RegistrationView: View {
                 })
             }
         }
+        .bottomSheet(bottomSheetPosition: $birthPicker, switchablePositions: [], content: {
+            DatePicker("", selection: $birthDate, in: ...Date(), displayedComponents: .date)
+                .datePickerStyle(.graphical)
+                .background(.white)
+                .ignoresSafeArea()
+        })
+        .customBackground {
+            Color.white
+                .cornerRadius(30)
+                .shadow(color: .gray.opacity(0.2), radius: 10, x: 0, y: 0)
+        }
+        .isResizable(false)
+        .showCloseButton(false)
+        .enableContentDrag(false)
+        .enableSwipeToDismiss(true)
+        .enableTapToDismiss(true)
+        .onChange(of: birthDate, perform: { value in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/yyyy/dd"
+            dateOfBirth = dateFormatter.string(from: value)
+            birthPicker = .hidden
+        })
     }
 }
 
