@@ -5,12 +5,14 @@
 //  Created by Alex Popa on 13/04/24.
 //
 
+import BottomSheet
 import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var router: Router
     @Environment(\.appEnvironment) var appEnvironment
     @State private var action: Loadable<Void> = .notRequested
+    @State private var resetPasswordSheet: BottomSheetPosition = .hidden
     @State private var email: String = ""
     @State private var emailError: String? = nil
     @State private var password: String = ""
@@ -27,7 +29,7 @@ struct LoginView: View {
                             placeholder: "Your e-mail")
 
             Spacer()
-                .frame(height: 16)
+                .frame(height: 8)
 
             CustomSecureField(text: $password,
                               error: $passwordError,
@@ -35,11 +37,16 @@ struct LoginView: View {
                               placeholder: "Your password")
 
             Spacer()
-                .frame(height: 16)
+                .frame(height: 8)
 
             if let error = action.hasError {
                 Text(error.localizedDescription)
                     .foregroundStyle(.red)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 12))
+                    .padding(.leading, 4)
+            } else {
+                Spacer().frame(height: 14)
             }
 
             Button("Sign in") {
@@ -49,7 +56,9 @@ struct LoginView: View {
             .buttonStyle(Primary(type: .regular))
 
             HStack {
-                Button(action: {}, label: {
+                Button(action: {
+                    resetPasswordSheet = .dynamic
+                }, label: {
                     Text("Dimenticato la password?")
                         .font(.system(size: 12))
                         .padding(.leading, 8)
@@ -72,14 +81,31 @@ struct LoginView: View {
 
             Spacer().frame(height: 50)
         }
+        .onReceive(appEnvironment.interactors.auth.$currentSession, perform: { value in
+            if value ?? false {
+                router.setMain(.home)
+            }
+
+        })
         .padding(.horizontal, 16)
         .overlay {
             if action.isLoading {
                 LoadingView()
-            } else if let error = action.hasError {
-                Text(error.localizedDescription)
             }
         }
+        .bottomSheet(bottomSheetPosition: $resetPasswordSheet, switchablePositions: [.dynamic]) {
+            ResetPasswordView(email: email)
+        }
+        .customBackground {
+            Color.white
+                .cornerRadius(30)
+                .shadow(color: .gray.opacity(0.2), radius: 10, x: 0, y: 0)
+        }
+        .isResizable(false)
+        .showCloseButton(false)
+        .enableContentDrag(false)
+        .enableSwipeToDismiss(true)
+        .enableTapToDismiss(true)
     }
 }
 
@@ -88,9 +114,7 @@ private extension LoginView {
         guard checkFields() else {
             return
         }
-
         appEnvironment.interactors.auth.signIn(email: email, password: password) { action = $0 }
-        router.setMain(.home)
     }
 
     func checkFields() -> Bool {
