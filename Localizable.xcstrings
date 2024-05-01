@@ -34,16 +34,22 @@
     "Le password non coincidono" : {
 
     },
-    "main" : {
+    "login" : {
 
     },
     "Non hai un account?" : {
+
+    },
+    "Per il reset della password, ti invieremo le istruzioni all'indirizzo e-mail specificato" : {
 
     },
     "privacy policy" : {
 
     },
     "Registrati" : {
+
+    },
+    "Reset password" : {
 
     },
     "Select an item" : {
@@ -72,7 +78,13 @@
     "terms and conditions" : {
 
     },
+    "Un'email di reset è stata inviata all'indirizzo %@. Controlla la tua casella di posta e segui le istruzioni per reimpostare la password." : {
+
+    },
     "Unchecked" : {
+
+    },
+    "User does not exist. Please verify the provided information." : {
 
     }
   },
