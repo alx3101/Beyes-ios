@@ -50,6 +50,9 @@ struct CustomTextField: View {
                     .font(.system(size: 12))
                     .foregroundStyle(.threateningRed)
                     .padding(.leading, 4)
+            } else {
+                Spacer()
+                    .frame(height: 14.3)
             }
         }
         .onChange(of: text, perform: { _ in
