@@ -14,6 +14,7 @@ protocol AuthVInteractorProvider {
     func signIn(email: String, password: String, action: @escaping (Loadable<Void>) -> Void)
     func signUp(email: String, password: String, action: @escaping (Loadable<Void>) -> Void)
     func logout(action: @escaping (Loadable<Void>) -> Void)
+    func resetPassword(email: String, action: @escaping (Loadable<Void>) -> Void)
 }
 
 class AuthInteractor: AuthVInteractorProvider, ObservableObject {
@@ -26,8 +27,6 @@ class AuthInteractor: AuthVInteractorProvider, ObservableObject {
         service = authServices
         service.sessionSubjectPublisher
             .receive(on: DispatchQueue.main)
-            .first(where: { $0 != nil })
-            .first()
             .sink { [weak self] session in
                 self?.currentSession = session
             }
@@ -51,6 +50,27 @@ class AuthInteractor: AuthVInteractorProvider, ObservableObject {
         Task {
             do {
                 try await service.signUp(email: email, password: password)
+                action(.loaded(voidReturn))
+            } catch {
+                action(.failed(error))
+            }
+        }
+    }
+
+    func resetPassword(email: String, action: @escaping (Loadable<Void>) -> Void) {
+        action(.loading)
+        Task {
+            do {
+                guard let userExist = try await service.checkUserExists(email: email) else {
+                    return action(.failed(AuthError.unknown))
+                }
+                if userExist {
+                    try await service.resetPassword(email: email)
+                    action(.loaded(voidReturn))
+                } else {
+                    action(.failed(AuthError.userNotExist))
+                }
+
             } catch {
                 action(.failed(error))
             }
@@ -99,6 +119,7 @@ enum AuthError: Error {
     case empty(Field)
     case invalid(Field)
     case passwordNotMatch
+    case userNotExist
     case unknown
 
     var localizedDescription: String {
@@ -112,6 +133,8 @@ enum AuthError: Error {
 
         case .unknown:
             return NSLocalizedString("Si è verificato un errore sconosciuto.", comment: "")
+        case .userNotExist:
+            return NSLocalizedString("User does not exist. Please verify the provided information.", comment: "")
         }
     }
 }

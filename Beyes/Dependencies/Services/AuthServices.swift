@@ -39,10 +39,17 @@ class AuthServices: AuthProtocol {
     }
 
     func signUp(email: String, password: String) async throws {
-        try await client.auth.signUp(
+        let signUp = try await client.auth.signUp(
             email: email,
             password: password
         )
+
+        let post = try await client.database
+            .schema("public")
+            .from("users_email")
+            .insert(["email": signUp.session?.user.email])
+            .execute()
+        print("Informazioni utente inserite nel database.")
     }
 
     private func currentSession() {
@@ -55,6 +62,25 @@ class AuthServices: AuthProtocol {
                     sessionSubject.send(state.session != nil)
                 }
             }
+        }
+    }
+
+    func checkUserExists(email: String) async throws -> Bool? {
+        do {
+            // Execute a query to check if the user exists in the database
+            let response = try await client.database
+                .schema("public")
+                .from("users_email")
+                .select("email")
+                .eq("email", value: email) // Confronta direttamente il valore della colonna email con l'email fornita
+                .execute()
+
+            // Check if the query returns any results
+            return !response.data.isEmpty
+        } catch {
+            // If there was an error during the query execution, handle it here
+            print("Error during query execution:", error.localizedDescription)
+            return nil
         }
     }
 
