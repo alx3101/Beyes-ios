@@ -82,6 +82,16 @@ struct RegistrationView: View {
                     Spacer()
                         .frame(height: 16)
 
+                    if let error = action.hasError {
+                        Text(error.localizedDescription)
+                            .foregroundStyle(.red)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.system(size: 12))
+                            .padding(.leading, 4)
+                    } else {
+                        Spacer().frame(height: 14)
+                    }
+
                     checkStack
 
                     Button("Sign in") {
@@ -100,6 +110,12 @@ struct RegistrationView: View {
                         LoadingView()
                     }
                 }
+                .onReceive(appEnvironment.interactors.auth.$currentSession, perform: { value in
+                    if value ?? false {
+                        router.setMain(.home)
+                    }
+
+                })
             }
         }
     }
@@ -148,11 +164,7 @@ private extension RegistrationView {
         guard checkFields() else {
             return
         }
-        appEnvironment.interactors.auth.signUp(email: email, password: password) { action = $0
-            if case .loaded = $0 {
-                router.setMain(.home)
-            }
-        }
+        appEnvironment.interactors.auth.signUp(email: email, password: password) { action = $0 }
     }
 
     func pop() {
