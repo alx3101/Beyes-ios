@@ -21,9 +21,11 @@ extension EnvironmentValues {
 
 class Interactors: ObservableObject {
     @ObservedObject var auth: AuthInteractor
+    let shopInteractor: ShopInteractor
 
     init(services: Services) {
         auth = AuthInteractor(authServices: services.authServices)
+        shopInteractor = ShopInteractor(service: services.shopsServices)
     }
 }
 
