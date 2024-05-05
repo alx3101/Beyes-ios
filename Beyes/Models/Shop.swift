@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Shop: Codable {
+struct Shop: Codable, Equatable, Identifiable {
     let brandName: String
     let brandID: UUID
     let sensorID: UUID
@@ -38,11 +38,6 @@ struct Shop: Codable {
         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: [])
     }
 
-    static func mocks() -> [Shop] {
-        [.init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: []),
-         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: [])]
-    }
-
     enum Columns {
         static let brandName = "brand_name"
         static let brandID = "brand_id"
@@ -55,5 +50,16 @@ struct Shop: Codable {
         static let addedAt = "added_at"
         static let shopCity = "shop_city"
         static let businessHours = "business_hours"
+    }
+}
+
+extension [Shop] {
+    static func mocks() -> [Shop] {
+        [.init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: []),
+         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: []),
+         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: []),
+         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: []),
+         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: []),
+         .init(brandName: "Brand test", brandID: UUID(), sensorID: UUID(), numberOfSensors: 2, shopAddress: "Test address", shopCoordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, shopCity: "City test", businessHours: [])]
     }
 }
