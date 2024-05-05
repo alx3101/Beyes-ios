@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%lld" : {
+
+    },
     "Accept" : {
 
     },
@@ -35,9 +38,6 @@
 
     },
     "Le password non coincidono" : {
-
-    },
-    "login" : {
 
     },
     "Non hai un account?" : {
