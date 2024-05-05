@@ -12,8 +12,9 @@ import SwiftyBeaver
 
 protocol AuthProtocol {
     func signIn(email: String, password: String) async throws
-    func signUp(email: String, password: String) async throws
+    func signUp(email: String, password: String, fullName: String, dateOfBirth: String, country: String, termsChecked: Bool, privacyChecked: Bool) async throws
     func logout() async throws
+    func deleteAccount(id: String) async throws
     func resetPassword(email: String) async throws
     func refreshSession() async throws
 }
@@ -38,10 +39,17 @@ class AuthServices: AuthProtocol {
         )
     }
 
-    func signUp(email: String, password: String) async throws {
+    func signUp(email: String, password: String, fullName: String, dateOfBirth: String, country: String, termsChecked: Bool, privacyChecked: Bool) async throws {
         let signUp = try await client.auth.signUp(
             email: email,
-            password: password
+            password: password,
+            data: [
+                "full_name": .string(fullName),
+                "date_of_birth": .string(dateOfBirth),
+                "country": .string(country), // Assicurati che `selectedCountry` non sia nil
+                "terms_checked": .bool(termsChecked),
+                "privacy_checked": .bool(privacyChecked)
+            ]
         )
 
         let post = try await client.database
@@ -82,6 +90,10 @@ class AuthServices: AuthProtocol {
             print("Error during query execution:", error.localizedDescription)
             return nil
         }
+    }
+
+    func deleteAccount(id: String) async throws {
+        _ = try await client.auth.admin.deleteUser(id: id)
     }
 
     func logout() async throws {
