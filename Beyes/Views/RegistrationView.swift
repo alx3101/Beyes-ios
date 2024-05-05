@@ -117,12 +117,6 @@ struct RegistrationView: View {
                         LoadingView()
                     }
                 }
-                .onReceive(appEnvironment.interactors.auth.$currentSession, perform: { value in
-                    if value ?? false {
-                        router.setMain(.home)
-                    }
-
-                })
             }
         }
         .bottomSheet(bottomSheetPosition: $birthPicker, switchablePositions: [], content: {
@@ -146,6 +140,12 @@ struct RegistrationView: View {
             dateFormatter.dateFormat = "MM/yyyy/dd"
             dateOfBirth = dateFormatter.string(from: value)
             birthPicker = .hidden
+        })
+        .onReceive(appEnvironment.interactors.auth.$currentSession, perform: { value in
+            if value ?? false {
+                router.popToRoot()
+            }
+
         })
     }
 }
@@ -193,11 +193,17 @@ private extension RegistrationView {
         guard checkFields() else {
             return
         }
-        appEnvironment.interactors.auth.signUp(email: email, password: password) { action = $0 }
+        appEnvironment.interactors.auth.signUp(email: email,
+                                               password: password,
+                                               fullName: fullName,
+                                               dateOfBirth: dateOfBirth,
+                                               country: selectedCountry?.name ?? "No data",
+                                               termsChecked: termsChecked,
+                                               privacyChecked: privacyChecked) { action = $0 }
     }
 
     func pop() {
-        router.navigateBack()
+        router.pop()
     }
 
     var countries: [Country] {

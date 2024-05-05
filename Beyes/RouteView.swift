@@ -44,7 +44,7 @@ class Router: ObservableObject {
     }
 
     // Used to go back to the previous screen
-    func navigateBack() {
+    func pop() {
         path.removeLast()
     }
 
