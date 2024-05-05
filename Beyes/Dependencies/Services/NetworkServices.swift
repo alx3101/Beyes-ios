@@ -11,11 +11,11 @@ import Supabase
 // Enum defining different endpoint requests
 enum EndpointRequest: String {
     case brands = "Brands"
-    case shops = "Shops_Structures"
+    case shops = "Shops"
 }
 
 enum EndpointSchema: String {
-    case stores
+    case stores = "Stores"
     case pub = "public"
 }
 
