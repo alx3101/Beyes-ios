@@ -12,9 +12,10 @@ import SwiftUI
 protocol AuthVInteractorProvider {
     var currentSession: Bool? { get }
     func signIn(email: String, password: String, action: @escaping (Loadable<Void>) -> Void)
-    func signUp(email: String, password: String, action: @escaping (Loadable<Void>) -> Void)
+    func signUp(email: String, password: String, fullName: String, dateOfBirth: String, country: String, termsChecked: Bool, privacyChecked: Bool, action: @escaping (Loadable<Void>) -> Void)
     func logout(action: @escaping (Loadable<Void>) -> Void)
     func resetPassword(email: String, action: @escaping (Loadable<Void>) -> Void)
+    func deleteAccount(id: String, action: @escaping (Loadable<Void>) -> Void)
 }
 
 class AuthInteractor: AuthVInteractorProvider, ObservableObject {
@@ -45,11 +46,17 @@ class AuthInteractor: AuthVInteractorProvider, ObservableObject {
         }
     }
 
-    func signUp(email: String, password: String, action: @escaping (Loadable<Void>) -> Void) {
+    func signUp(email: String, password: String, fullName: String, dateOfBirth: String, country: String, termsChecked: Bool, privacyChecked: Bool, action: @escaping (Loadable<Void>) -> Void) {
         action(.loading)
         Task {
             do {
-                try await service.signUp(email: email, password: password)
+                try await service.signUp(email: email,
+                                         password: password,
+                                         fullName: fullName,
+                                         dateOfBirth: dateOfBirth,
+                                         country: country,
+                                         termsChecked: termsChecked,
+                                         privacyChecked: privacyChecked)
                 action(.loaded(voidReturn))
             } catch {
                 action(.failed(error))
@@ -81,6 +88,17 @@ class AuthInteractor: AuthVInteractorProvider, ObservableObject {
         Task {
             do {
                 try await service.logout()
+                action(.loaded(voidReturn))
+            } catch {
+                action(.failed(error))
+            }
+        }
+    }
+
+    func deleteAccount(id: String, action: @escaping (Loadable<Void>) -> Void) {
+        Task {
+            do {
+                try await service.deleteAccount(id: id)
                 action(.loaded(voidReturn))
             } catch {
                 action(.failed(error))
