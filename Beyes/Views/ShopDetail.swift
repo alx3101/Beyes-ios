@@ -61,7 +61,11 @@ struct ShopDetail: View {
                             isFavorite.toggle()
                         }
 
-                        NavigationButton(imageName: "phone.fill") {}
+                        if let numberPhone = shop.numberPhone {
+                            NavigationButton(imageName: "phone.fill") {
+                                callShop(numberPhone)
+                            }
+                        }
 
                         NavigationButton(imageName: isFavorite ? "star.fill" : "star") {
                             isFavorite.toggle()
@@ -71,8 +75,10 @@ struct ShopDetail: View {
                             mapBottomSheet = .dynamic
                         }
 
-                        NavigationButton(imageName: "globe") {
-                            isFavorite.toggle()
+                        if let website = shop.website {
+                            NavigationButton(imageName: "globe") {
+                                openWebsite(website)
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -135,12 +141,12 @@ private extension ShopDetail {
 
     @ViewBuilder
     func informationRow(title: String, _ data: String) -> some View {
-        HStack {
-            Text("\(title):")
+        VStack(alignment: .leading, spacing: 4) {
+            Text("\(title)")
                 .font(.headline)
             Text(data)
 
-            Spacer()
+           
         }
     }
 
@@ -210,6 +216,16 @@ private extension ShopDetail {
 
 }
 
+extension ShopDetail {
+    func callShop(_ number: String) {
+        UIApplication.shared.open( URL(string: "tel://\(number)")!)
+    }
+    
+    func openWebsite(_ url: String) {
+        UIApplication.shared.open( URL(string: url)!)
+    }
+}
+
 #Preview(body: {
-    ShopDetail(shop: .init(brand: "Unieuro", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 1, address: "Via carlo ciccio", coordinates: [], isShopPartner: false, id: UUID(), addedAt: .now, city: "test", businessHours: [""]), customers: .constant(0))
+    ShopDetail(shop: .init(brand: "Unieuro", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 1, address: "Via carlo ciccio", shortAddress: nil, coordinates: [], isShopPartner: false, id: UUID(), addedAt: .now, city: "test", businessHours: [""], website: nil), customers: .constant(0))
 })

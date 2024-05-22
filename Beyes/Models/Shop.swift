@@ -11,16 +11,18 @@ import MapKit
 struct Shop: Codable, Equatable, Hashable, Identifiable {
     let brand: String
     let brandID: UUID
-    let numberPhone: Int?
+    let numberPhone: String?
     let sensorID: UUID
     let numberOfSensors: Int
     let address: String
+    let shortAddress: String?
     let coordinates: [Double]
     let isShopPartner: Bool
     let id: UUID
     let addedAt: Date
     let city: String
     let businessHours: [String]
+    let website: String?
 
     enum CodingKeys: String, CodingKey {
         case brand = "brand_name"
@@ -35,10 +37,12 @@ struct Shop: Codable, Equatable, Hashable, Identifiable {
         case addedAt = "added_at"
         case city = "shop_city"
         case businessHours = "business_hours"
+        case shortAddress
+        case website
     }
 
     static func mock() -> Shop {
-        .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [])
+        .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", shortAddress: nil, coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [], website: "")
     }
 
     enum Columns {
@@ -58,12 +62,12 @@ struct Shop: Codable, Equatable, Hashable, Identifiable {
 
 extension [Shop] {
     static func mocks() -> [Shop] {
-        [.init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: []),
-         .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: []),
-         .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: []),
-         .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: []),
-         .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: []),
-         .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [])]
+        var shops: [Shop] = []
+        for _ in 0...10 {
+            let shop: Shop = .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", shortAddress: nil, coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [], website: nil)
+            shops.append(shop)
+        }
+        return shops
     }
 
     func convert() async throws -> [Shop] {
@@ -80,8 +84,10 @@ extension [Shop] {
                 print("No results found")
                 return self
             }
+            let shortAddress = firstItem.placemark.title?.components(separatedBy: ",").first ?? shop.address
             
-            let shop = Shop.init(brand: firstItem.name!, brandID: shop.brandID, numberPhone: shop.numberPhone, sensorID: shop.sensorID, numberOfSensors: shop.numberOfSensors, address: firstItem.placemark.title!, coordinates: [firstItem.placemark.coordinate.latitude,firstItem.placemark.coordinate.longitude], isShopPartner: shop.isShopPartner, id: shop.id, addedAt: shop.addedAt, city: shop.city, businessHours: shop.businessHours)
+            let shop = Shop.init(brand: firstItem.name!, brandID: shop.brandID, numberPhone: firstItem.phoneNumber ?? "\(shop.numberPhone!)" , sensorID: shop.sensorID, numberOfSensors: shop.numberOfSensors, address: firstItem.placemark.title!, shortAddress: shortAddress
+                                 , coordinates: [firstItem.placemark.coordinate.latitude,firstItem.placemark.coordinate.longitude], isShopPartner: shop.isShopPartner, id: shop.id, addedAt: shop.addedAt, city: shop.city, businessHours: shop.businessHours, website: firstItem.url?.absoluteString ?? shop.website ?? "")
             shops.append(shop)
         }
         return shops

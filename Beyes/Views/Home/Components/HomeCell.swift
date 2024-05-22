@@ -32,8 +32,10 @@ struct HomeCell: View {
 
             VStack(spacing: 2) {
                 Text(shop.brand)
+                    .font(.system(size: 16))
 
-                Text(shop.address)
+                Text(shop.shortAddress ?? shop.address)
+                    .font(.system(size: 13))
             }
 
             Spacer().frame(height: 8)
