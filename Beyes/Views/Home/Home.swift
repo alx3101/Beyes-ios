@@ -58,6 +58,10 @@ private extension HomeView {
             LazyVGrid(columns: columns, content: {
                 DragList($shops) { shop in
                     HomeCell(shop: shop)
+                        .onTapGesture {
+                            router.navigateTo(.shopDetail(shop,
+                                                          .constant(10)))
+                        }
                 }
             })
             .padding(.horizontal, 8)
