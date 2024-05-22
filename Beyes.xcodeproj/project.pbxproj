@@ -14,6 +14,7 @@
 		AE1F35392BE13DDF006D3B19 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = AE1F35382BE13DDF006D3B19 /* BottomSheet */; };
 		AE1F353B2BE1414C006D3B19 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F353A2BE1414C006D3B19 /* ResetPasswordView.swift */; };
 		AE1F353D2BE1422F006D3B19 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F353C2BE1422F006D3B19 /* Font.swift */; };
+		AE2A7FC62BFE8F8E004BF03A /* MapOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2A7FC52BFE8F8E004BF03A /* MapOptions.swift */; };
 		AE2ADAB72BC2C2F500822383 /* ShopsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2ADAB62BC2C2F500822383 /* ShopsService.swift */; };
 		AE2ADABA2BC2C72200822383 /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = AE2ADAB92BC2C72200822383 /* CocoaMQTT */; };
 		AE36D1542BC9D06D00E910F8 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE36D1532BC9D06D00E910F8 /* AuthServices.swift */; };
@@ -25,6 +26,8 @@
 		AE5D0A372BE6B80D0037707A /* DragList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D0A362BE6B80D0037707A /* DragList.swift */; };
 		AE5D0A3A2BE6B8360037707A /* DropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D0A392BE6B8360037707A /* DropDelegate.swift */; };
 		AE5D0A3C2BE6C0D50037707A /* ShopInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D0A3B2BE6C0D50037707A /* ShopInteractor.swift */; };
+		AE5D0A3E2BE7CCE70037707A /* ShopDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5D0A3D2BE7CCE70037707A /* ShopDetail.swift */; };
+		AE8E3CF92BE82BD40059A3AF /* Binding + hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8E3CF82BE82BD40059A3AF /* Binding + hashable.swift */; };
 		AE9576F72BBDD2B700CDD267 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576F62BBDD2B700CDD267 /* Dependencies.swift */; };
 		AE9576FD2BBDD74500CDD267 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576FC2BBDD74500CDD267 /* RouteView.swift */; };
 		AE9576FF2BBDD76D00CDD267 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9576FE2BBDD76D00CDD267 /* AppRoute.swift */; };
@@ -69,6 +72,7 @@
 		AE1A3A392BCDC4990047488E /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		AE1F353A2BE1414C006D3B19 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		AE1F353C2BE1422F006D3B19 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		AE2A7FC52BFE8F8E004BF03A /* MapOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOptions.swift; sourceTree = "<group>"; };
 		AE2ADAB62BC2C2F500822383 /* ShopsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsService.swift; sourceTree = "<group>"; };
 		AE36D1532BC9D06D00E910F8 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
 		AE36D1562BC9DD0A00E910F8 /* APIErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 		AE5D0A362BE6B80D0037707A /* DragList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragList.swift; sourceTree = "<group>"; };
 		AE5D0A392BE6B8360037707A /* DropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDelegate.swift; sourceTree = "<group>"; };
 		AE5D0A3B2BE6C0D50037707A /* ShopInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopInteractor.swift; sourceTree = "<group>"; };
+		AE5D0A3D2BE7CCE70037707A /* ShopDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetail.swift; sourceTree = "<group>"; };
+		AE8E3CF82BE82BD40059A3AF /* Binding + hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding + hashable.swift"; sourceTree = "<group>"; };
 		AE9576F62BBDD2B700CDD267 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		AE9576FC2BBDD74500CDD267 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		AE9576FE2BBDD76D00CDD267 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 		AEEB7C872BB8090C00A3E2CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AE5D0A3D2BE7CCE70037707A /* ShopDetail.swift */,
 				AE5D0A322BE6B4000037707A /* Home */,
 				AEEB1A432BCA9F8800CEF98A /* Components */,
 				AEEB7C9E2BB80CC700A3E2CD /* Main.swift */,
@@ -300,6 +307,7 @@
 			children = (
 				AEEB7C8B2BB8095D00A3E2CD /* Shop.swift */,
 				AEF4646A2BDB132500A19DCF /* Country.swift */,
+				AE2A7FC52BFE8F8E004BF03A /* MapOptions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +338,7 @@
 				AE1A3A372BCDB2430047488E /* SafeArea.swift */,
 				AE06D9BC2BE04A5E007E9A5E /* NavigationBar.swift */,
 				AE06D9BE2BE04C23007E9A5E /* Strings.swift */,
+				AE8E3CF82BE82BD40059A3AF /* Binding + hashable.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -443,8 +452,7 @@
 		};
 		AE9577032BBDF1AE00CDD267 /* Format */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -456,7 +464,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/zsh\n\nPATH=$PATH:/opt/homebrew/bin\n\nREQUIRED_SWIFTFORMAT_MINOR='0.53'\n\nif ! type swiftformat > /dev/null; then\n  echo \"swiftformat not installed, exiting...\"\n  exit 1\nfi\n\nCURRENT_SWIFTFORMAT_VERSION=$(swiftformat --version)\nCURRENT_MAJOR_MINOR_VERSION=${CURRENT_SWIFTFORMAT_VERSION%.*}\n\nif [[ $CURRENT_MAJOR_MINOR_VERSION = $REQUIRED_SWIFTFORMAT_MINOR ]]; then\n    swiftformat .\nelse\n    echo \"swiftformat required version $REQUIRED_SWIFTFORMAT_MINOR, current version $CURRENT_MAJOR_MINOR_VERSION\"\n    exit 1\nfi\n";
 		};
@@ -468,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE5D0A352BE6B41C0037707A /* HomeCell.swift in Sources */,
+				AE5D0A3E2BE7CCE70037707A /* ShopDetail.swift in Sources */,
 				AE1A3A3A2BCDC4990047488E /* TopBar.swift in Sources */,
 				AE9577012BBDF03600CDD267 /* Splash.swift in Sources */,
 				AE5D0A372BE6B80D0037707A /* DragList.swift in Sources */,
@@ -490,6 +499,7 @@
 				AEADAF122BCC800000DF69ED /* RegistrationView.swift in Sources */,
 				AE1F353B2BE1414C006D3B19 /* ResetPasswordView.swift in Sources */,
 				AE9576F72BBDD2B700CDD267 /* Dependencies.swift in Sources */,
+				AE2A7FC62BFE8F8E004BF03A /* MapOptions.swift in Sources */,
 				AEEB1A532BCABD7400CEF98A /* XCAssets+Generated.swift in Sources */,
 				AEEB7C8C2BB8095D00A3E2CD /* Shop.swift in Sources */,
 				AEEB7CA42BB8197000A3E2CD /* Settings.swift in Sources */,
@@ -505,6 +515,7 @@
 				AEF4646B2BDB132500A19DCF /* Country.swift in Sources */,
 				AE1F353D2BE1422F006D3B19 /* Font.swift in Sources */,
 				AE1A3A382BCDB2430047488E /* SafeArea.swift in Sources */,
+				AE8E3CF92BE82BD40059A3AF /* Binding + hashable.swift in Sources */,
 				AEEB1A472BCAA9B700CEF98A /* LoadingView.swift in Sources */,
 				AEEB1A4C2BCAAE1300CEF98A /* Void.swift in Sources */,
 			);

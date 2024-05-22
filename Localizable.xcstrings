@@ -4,6 +4,12 @@
     "" : {
 
     },
+    "%@" : {
+
+    },
+    "%@:" : {
+
+    },
     "%lld" : {
 
     },
@@ -41,6 +47,9 @@
 
     },
     "Non hai un account?" : {
+
+    },
+    "Orari di apertura:" : {
 
     },
     "Per il reset della password, ti invieremo le istruzioni all'indirizzo e-mail specificato" : {
