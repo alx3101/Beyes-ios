@@ -18,6 +18,13 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var passwordError: String? = nil
 
+    init() {
+        #if DEBUG
+            _email = .init(initialValue: "beyes_tester@gmail.com")
+            _password = .init(initialValue: "CiaoCiao1!")
+        #endif
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()

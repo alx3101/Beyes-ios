@@ -62,11 +62,11 @@ enum MapOptions: String, CaseIterable {
 
         let urlString: String = switch self {
         case .waze:
-          "https://waze.com/ul?q=\(queryString)&ll=\(coordinateString)&navigate=yes"
+            "https://waze.com/ul?q=\(queryString)&ll=\(coordinateString)&navigate=yes"
         case .apple:
-             "https://maps.apple.com/?address=\(address)&ll=\(coordinateString)&q=\(queryString)"
+            "https://maps.apple.com/?address=\(address)&ll=\(coordinateString)&q=\(queryString)"
         case .google:
-             "https://www.google.com/maps?q=\(queryString),\(address)&g_st=ia"
+            "https://www.google.com/maps?q=\(queryString),\(address)&g_st=ia"
         }
 
         if let url = URL(string: urlString) {
@@ -74,4 +74,3 @@ enum MapOptions: String, CaseIterable {
         }
     }
 }
-

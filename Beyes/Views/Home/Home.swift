@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     @Environment(\.appEnvironment) var appEnvironment
     @EnvironmentObject var router: Router
-    @State private var action: Loadable<Void> = .notRequested
 
     let columns = Array(repeating: GridItem(.flexible()), count: 3)
 

@@ -10,9 +10,9 @@ import MapKit
 
 struct Shop: Codable, Equatable, Hashable, Identifiable {
     let brand: String
-    let brandID: UUID
+    let brandID: UUID?
     let numberPhone: String?
-    let sensorID: UUID
+    let sensorID: UUID?
     let numberOfSensors: Int
     let address: String
     let shortAddress: String?
@@ -21,7 +21,7 @@ struct Shop: Codable, Equatable, Hashable, Identifiable {
     let id: UUID
     let addedAt: Date
     let city: String
-    let businessHours: [String]
+    let businessHours: [String]?
     let website: String?
 
     enum CodingKeys: String, CodingKey {
@@ -42,7 +42,7 @@ struct Shop: Codable, Equatable, Hashable, Identifiable {
     }
 
     static func mock() -> Shop {
-        .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", shortAddress: nil, coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [], website: "")
+        .init(brand: "Tabaccheria pieve di curtarolo", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Via alcide de gasperi 36", shortAddress: nil, coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [], website: "")
     }
 
     enum Columns {
@@ -63,7 +63,7 @@ struct Shop: Codable, Equatable, Hashable, Identifiable {
 extension [Shop] {
     static func mocks() -> [Shop] {
         var shops: [Shop] = []
-        for _ in 0...10 {
+        for _ in 0 ... 10 {
             let shop: Shop = .init(brand: "Brand test", brandID: UUID(), numberPhone: nil, sensorID: UUID(), numberOfSensors: 2, address: "Test address", shortAddress: nil, coordinates: [], isShopPartner: false, id: UUID(), addedAt: Date.now, city: "City test", businessHours: [], website: nil)
             shops.append(shop)
         }
@@ -78,16 +78,16 @@ extension [Shop] {
             searchRequest.naturalLanguageQuery = shop.brand
             searchRequest.region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
             let search = MKLocalSearch(request: searchRequest)
-            
+
             let response = try await search.start()
             guard let firstItem = response.mapItems.first else {
                 print("No results found")
                 return self
             }
             let shortAddress = firstItem.placemark.title?.components(separatedBy: ",").first ?? shop.address
-            
-            let shop = Shop.init(brand: firstItem.name!, brandID: shop.brandID, numberPhone: firstItem.phoneNumber ?? "\(shop.numberPhone!)" , sensorID: shop.sensorID, numberOfSensors: shop.numberOfSensors, address: firstItem.placemark.title!, shortAddress: shortAddress
-                                 , coordinates: [firstItem.placemark.coordinate.latitude,firstItem.placemark.coordinate.longitude], isShopPartner: shop.isShopPartner, id: shop.id, addedAt: shop.addedAt, city: shop.city, businessHours: shop.businessHours, website: firstItem.url?.absoluteString ?? shop.website ?? "")
+
+            let shop = Shop(brand: firstItem.name!, brandID: shop.brandID, numberPhone: firstItem.phoneNumber ?? "\(shop.numberPhone!)", sensorID: shop.sensorID, numberOfSensors: shop.numberOfSensors, address: firstItem.placemark.title!, shortAddress: shortAddress,
+                            coordinates: [firstItem.placemark.coordinate.latitude, firstItem.placemark.coordinate.longitude], isShopPartner: shop.isShopPartner, id: shop.id, addedAt: shop.addedAt, city: shop.city, businessHours: shop.businessHours, website: firstItem.url?.absoluteString ?? shop.website ?? "")
             shops.append(shop)
         }
         return shops

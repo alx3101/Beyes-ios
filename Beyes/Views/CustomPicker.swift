@@ -109,7 +109,6 @@ struct CustomPicker<SelectionValue, Content>: View where SelectionValue == Conte
             .opacity(isEnabled ? 1.0 : 0.6)
             .font(.custom("RetroComputer", size: 13))
             .animation(.easeInOut(duration: 0.12), value: isPicking)
-            .sensoryFeedback(.selection, trigger: selection)
             .zIndex(1)
         }
     }
