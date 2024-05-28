@@ -12,9 +12,7 @@ struct HomeCell: View {
     let shop: Shop
 
     var body: some View {
-        VStack(spacing: 0) {
-            Spacer().frame(height: 8)
-
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text("\(customersCount)")
                     .padding(.horizontal, 10)
@@ -26,21 +24,25 @@ struct HomeCell: View {
 
                 Spacer()
             }
-            .padding(.horizontal, 4)
 
-            Spacer().frame(height: 16)
+            Spacer()
+                .frame(height: 16)
 
-            VStack(spacing: 2) {
+            VStack(spacing: 4) {
                 Text(shop.brand)
                     .font(.system(size: 16))
+                    .minimumScaleFactor(0.8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(shop.shortAddress ?? shop.address)
                     .font(.system(size: 13))
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
 
-            Spacer().frame(height: 8)
+            Spacer()
         }
         .padding(8)
+        .frame(maxHeight: 130)
         .background {
             RoundedRectangle(cornerRadius: 15.0)
                 .fill(.regularMaterial)
@@ -50,5 +52,14 @@ struct HomeCell: View {
 }
 
 #Preview {
-    HomeCell(shop: .mock())
+    VStack {
+        let columns = Array(repeating: GridItem(.flexible()), count: 3)
+
+        LazyVGrid(columns: columns, content: {
+            ForEach(1 ... 2, id: \.self) { _ in
+                HomeCell(shop: .mock())
+            }
+        })
+    }
+    .padding(.horizontal, 8)
 }
